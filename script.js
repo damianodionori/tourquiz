@@ -29,21 +29,48 @@ const questions = [
       ]
     },
     {
-      question: "Quale di questi animali è rappresentato nella collezione egizia?",
+      question: "Quale di questi oggetti è stato trovato nelle Isole Ebridi?",
       answers: [
-        { text: "Sfinge", correct: true },
-        { text: "Tigre", correct: false },
-        { text: "Panda", correct: false },
-        { text: "Kangaroo", correct: false }
+        { text: "Gli Scacchi di Lewis", correct: true },
+        { text: "La Stele di Rosetta", correct: false },
+        { text: "I Marmi del Partenone", correct: false },
+        { text: "Il Moai", correct: false }
       ]
     },
     {
-      question: "In quale sala del British Museum si trovano le mummie egizie?",
+      question: "Da dove provengono i Marmi del Partenone?",
       answers: [
-        { text: "Sala Egizia", correct: true },
-        { text: "Sala Greca", correct: false },
-        { text: "Sala Romana", correct: false },
-        { text: "Sala Medievale", correct: false }
+        { text: "Atene, Grecia", correct: true },
+        { text: "Roma, Italia", correct: false },
+        { text: "Il Cairo, Egitto", correct: false },
+        { text: "Città del Messico", correct: false }
+      ]
+    },
+    {
+      question: "Quale di questi è un oggetto azteco?",
+      answers: [
+        { text: "Il Serpente a Due Teste", correct: true },
+        { text: "La Stele di Rosetta", correct: false },
+        { text: "Gli Scacchi di Lewis", correct: false },
+        { text: "I Marmi del Partenone", correct: false }
+      ]
+    },
+    {
+      question: "Da dove proviene il Moai esposto al British Museum?",
+      answers: [
+        { text: "Isola di Pasqua", correct: true },
+        { text: "Hawaii", correct: false },
+        { text: "Nuova Zelanda", correct: false },
+        { text: "Tahiti", correct: false }
+      ]
+    },
+    {
+      question: "Perché la Stele di Rosetta è così importante?",
+      answers: [
+        { text: "Ha aiutato a decifrare i geroglifici egizi", correct: true },
+        { text: "È fatta d'oro", correct: false },
+        { text: "È la più grande stele egizia", correct: false },
+        { text: "Ha più di 5000 anni", correct: false }
       ]
     }
   ];
@@ -69,12 +96,24 @@ const questions = [
     showQuestion();
   }
   
+  // Funzione per mescolare un array
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  
   function showQuestion() {
     resetState();
     let currentQuestion = questions[currentQuestionIndex];
     questionElement.innerText = currentQuestion.question;
   
-    currentQuestion.answers.forEach(answer => {
+    // Creiamo una copia delle risposte e le mescoliamo
+    const shuffledAnswers = shuffleArray([...currentQuestion.answers]);
+  
+    shuffledAnswers.forEach(answer => {
       const button = document.createElement('button');
       button.innerText = answer.text;
       button.classList.add('btn');
@@ -126,66 +165,212 @@ const questions = [
     certificateContainer.style.display = 'block';
     finalScoreElement.textContent = score;
     
-    if (!document.getElementById('restart-btn')) {
-      const restartButton = document.createElement('button');
-      restartButton.id = 'restart-btn';
-      restartButton.innerHTML = 'Ricomincia Quiz';
-      restartButton.style.backgroundColor = '#3498db';
-      restartButton.style.marginTop = '20px';
-      restartButton.addEventListener('click', startQuiz);
-      document.getElementById('certificate-content').appendChild(restartButton);
+    const nameInput = document.getElementById('child-name');
+    if (nameInput) {
+      nameInput.removeAttribute('readonly');
+      nameInput.removeAttribute('disabled');
+      nameInput.focus();
     }
   }
   
   function printCertificate() {
     const childName = document.getElementById('child-name').value || 'Piccolo Esploratore';
-    const certificateContent = document.getElementById('certificate-content').innerHTML;
+    const currentDate = new Date().toLocaleDateString('it-IT');
     
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
       <html>
         <head>
           <title>Certificato di Piccolo Esploratore</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
           <style>
+            @media print {
+              body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+              }
+              .certificate {
+                margin: 0;
+                border: 2px solid #3498db !important;
+                -webkit-print-color-adjust: exact !important;
+              }
+              @page {
+                size: auto;
+                margin: 0mm;
+              }
+            }
+
             body {
-              font-family: 'Comic Neue', cursive;
-              text-align: center;
-              padding: 50px;
+              margin: 0;
+              padding: 20px;
+              background: #f9f7e8;
+              font-family: Georgia, serif;
             }
+
             .certificate {
-              border: 10px solid #3498db;
-              padding: 30px;
-              margin: 20px;
+              max-width: 800px;
+              margin: 0 auto;
+              padding: 20px;
+              background: #f9f7e8;
+              position: relative;
+              text-align: center;
+              border: 2px solid #3498db;
+              border-radius: 10px;
             }
+
+            .certificate::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-image: 
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Rosetta_Stone.JPG/320px-Rosetta_Stone.JPG'),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Moai_Rano_raraku.jpg/320px-Moai_Rano_raraku.jpg'),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Parthenon_Marbles%2C_British_Museum_1.jpg/320px-Parthenon_Marbles%2C_British_Museum_1.jpg'),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Lewis_Chessmen_in_the_British_Museum.jpg/320px-Lewis_Chessmen_in_the_British_Museum.jpg');
+              background-size: 150px, 150px, 150px, 150px;
+              background-position: 
+                10% 10%,
+                90% 10%,
+                10% 90%,
+                90% 90%;
+              background-repeat: no-repeat;
+              opacity: 0.1;
+              z-index: 0;
+              -webkit-print-color-adjust: exact;
+            }
+
+            .certificate::after {
+              content: '';
+              position: absolute;
+              top: 20px;
+              left: 20px;
+              right: 20px;
+              bottom: 20px;
+              border: 4px double #3498db;
+              border-radius: 15px;
+              z-index: 1;
+            }
+
+            .content {
+              position: relative;
+              z-index: 2;
+              padding: 20px;
+            }
+
             h1 {
               color: #2c3e50;
+              font-size: 1.8em;
+              margin-bottom: 20px;
+              line-height: 1.3;
+            }
+
+            .name {
+              font-size: 2em;
+              color: #2c3e50;
+              margin: 20px 0;
+              font-weight: bold;
+            }
+
+            p {
+              font-size: 1.2em;
+              line-height: 1.4;
+              margin: 10px 0;
+              color: #34495e;
+            }
+
+            .score {
+              font-size: 1.4em;
+              margin: 20px 0;
+              font-weight: bold;
+              color: #2c3e50;
+            }
+
+            .date {
+              font-style: italic;
+              margin-top: 20px;
+            }
+
+            @media screen and (min-width: 768px) {
+              .certificate {
+                padding: 40px;
+              }
+              h1 {
+                font-size: 2.2em;
+              }
+              .name {
+                font-size: 2.5em;
+              }
+              p {
+                font-size: 1.3em;
+              }
             }
           </style>
         </head>
         <body>
           <div class="certificate">
-            <h1>�� Certificato di Piccolo Esploratore 🎉</h1>
-            <p>Questo certificato attesta che</p>
-            <h2>${childName}</h2>
-            <p>ha completato con successo il Tour Quiz!</p>
-            <p>Punteggio finale: ${score}</p>
+            <div class="content">
+              <h1>🏛️ Certificato di Piccolo Esploratore<br>del British Museum 🏛️</h1>
+              <p>Con grande piacere si certifica che</p>
+              <div class="name">${childName}</div>
+              <p>ha completato con successo il Tour Quiz del British Museum</p>
+              <p>dimostrando una straordinaria conoscenza della storia e dei tesori del museo!</p>
+              <div class="score">Punteggio finale: ${score}</div>
+              <div class="date">Data: ${currentDate}</div>
+            </div>
           </div>
         </body>
       </html>
     `);
     printWindow.document.close();
-    printWindow.print();
+
+    // Aspetta che le immagini siano caricate prima di stampare
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      alert('Salva il certificato come PDF per stamparlo più tardi!');
+    } else {
+      setTimeout(() => {
+        printWindow.print();
+      }, 1000); // Aumentato il tempo di attesa per il caricamento delle immagini
+    }
   }
   
-  nextButton.addEventListener('click', () => {
-    if (currentQuestionIndex < questions.length) {
-      handleNextButton();
-    } else {
-      startQuiz();
+  // Add event listeners when the page loads
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the quiz
+    startQuiz();
+
+    // Set up event listeners
+    nextButton.addEventListener('click', handleNextButton);
+
+    // Set up certificate-related event listeners
+    const restartBtn = document.getElementById('restart-btn');
+    if (restartBtn) {
+      restartBtn.addEventListener('click', startQuiz);
+    }
+
+    const printBtn = document.getElementById('print-certificate');
+    if (printBtn) {
+      printBtn.addEventListener('click', printCertificate);
+    }
+
+    const nameInput = document.getElementById('child-name');
+    if (nameInput) {
+      nameInput.removeAttribute('readonly');
+      nameInput.removeAttribute('disabled');
     }
   });
   
-  printCertificateButton.addEventListener('click', printCertificate);
-  
-  startQuiz();
+  // Aggiungi gestione touch per i pulsanti
+  document.querySelectorAll('button').forEach(button => {
+    button.addEventListener('touchstart', function() {
+      this.style.transform = 'scale(0.98)';
+    });
+    
+    button.addEventListener('touchend', function() {
+      this.style.transform = 'scale(1)';
+    });
+  });
   

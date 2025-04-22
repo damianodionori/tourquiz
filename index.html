@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>British Museum Quiz per Piccoli Esploratori</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
   <div class="container">
@@ -20,18 +21,31 @@
 
     <div id="certificate-container" style="display: none;">
       <div class="certificate">
-        <h2>🎉 Certificato di Piccolo Esploratore del British Museum 🎉</h2>
+        <h2>🏛️ Certificato di Piccolo Esploratore del British Museum 🏛️</h2>
         <div id="certificate-content">
-          <p>Questo certificato attesta che</p>
-          <input type="text" id="child-name" placeholder="Inserisci il tuo nome">
-          <p>ha completato con successo il Tour Quiz del British Museum!</p>
-          <p>Punteggio finale: <span id="final-score">0</span></p>
-          <button id="print-certificate">Stampa Certificato</button>
+          <p class="certificate-text">Con grande piacere si certifica che</p>
+          <input type="text" id="child-name" placeholder="Inserisci il tuo nome" autocomplete="off">
+          <p class="certificate-text">ha completato con successo il Tour Quiz del British Museum</p>
+          <p class="certificate-text">dimostrando una straordinaria conoscenza della storia e dei tesori del museo!</p>
+          <p class="certificate-score">Punteggio finale: <span id="final-score">0</span></p>
+          <p class="certificate-date">Data: <span id="current-date"></span></p>
+          
+          <div class="certificate-buttons">
+            <button class="certificate-button" id="print-certificate">
+              <i class="fas fa-print"></i> Stampa Certificato
+            </button>
+            <button class="certificate-button" id="restart-btn">
+              <i class="fas fa-redo"></i> Ricomincia Quiz
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
   
   <script src="script.js"></script>
+  <script>
+    document.getElementById('current-date').textContent = new Date().toLocaleDateString('it-IT');
+  </script>
 </body>
 </html>

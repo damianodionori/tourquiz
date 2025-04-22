@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>British Museum Quiz per Piccoli Esploratori</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>🏛️ British Museum Quiz per Piccoli Esploratori! 🏛️</h1>
+    
+    <div id="quiz-container">
+      <div id="score-display">Punteggio: <span id="score">0</span></div>
+      <div id="question">Domanda qui</div>
+      <div id="answer-buttons" class="btn-container"></div>
+      <button id="next-btn">Avanti</button>
+    </div>
+
+    <div id="certificate-container" style="display: none;">
+      <div class="certificate">
+        <h2>🎉 Certificato di Piccolo Esploratore del British Museum 🎉</h2>
+        <div id="certificate-content">
+          <p>Questo certificato attesta che</p>
+          <input type="text" id="child-name" placeholder="Inserisci il tuo nome">
+          <p>ha completato con successo il Tour Quiz del British Museum!</p>
+          <p>Punteggio finale: <span id="final-score">0</span></p>
+          <button id="print-certificate">Stampa Certificato</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>

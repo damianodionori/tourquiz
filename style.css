@@ -1,0 +1,122 @@
+body {
+  font-family: 'Comic Neue', cursive;
+  margin: 0;
+  padding: 20px;
+  background-color: #f0f9ff;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+#quiz-container {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+#score-display {
+  text-align: right;
+  font-size: 1.2em;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+#question {
+  font-size: 1.5em;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.btn-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+button:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
+}
+
+#next-btn {
+  display: block;
+  margin: 20px auto;
+  background-color: #2ecc71;
+  padding: 15px 30px;
+}
+
+#next-btn:hover {
+  background-color: #27ae60;
+}
+
+.certificate {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.certificate h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+#child-name {
+  font-size: 1.2em;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#print-certificate {
+  background-color: #e74c3c;
+  margin-top: 20px;
+}
+
+#print-certificate:hover {
+  background-color: #c0392b;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.correct {
+  background-color: #2ecc71 !important;
+  animation: bounce 0.5s;
+}
+
+.incorrect {
+  background-color: #e74c3c !important;
+}
+  

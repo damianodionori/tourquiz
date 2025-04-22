@@ -178,10 +178,16 @@ const questions = [
     const currentDate = new Date().toLocaleDateString('it-IT');
     
     const printWindow = window.open('', '_blank');
-    printWindow.document.write(`
+    if (!printWindow) {
+      alert('Per favore, permetti l\'apertura dei popup per stampare il certificato.');
+      return;
+    }
+
+    const certificateContent = `
       <html>
         <head>
           <title>Certificato di Piccolo Esploratore</title>
+          <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
           <style>
@@ -322,19 +328,24 @@ const questions = [
               <div class="date">Data: ${currentDate}</div>
             </div>
           </div>
+          <script>
+            window.onload = function() {
+              // Aspetta che i font siano caricati
+              document.fonts.ready.then(function () {
+                if (window.matchMedia('(max-width: 767px)').matches) {
+                  alert('Salva il certificato come PDF per stamparlo più tardi!');
+                } else {
+                  window.print();
+                }
+              });
+            };
+          </script>
         </body>
       </html>
-    `);
-    printWindow.document.close();
+    `;
 
-    // Aspetta che le immagini siano caricate prima di stampare
-    if (window.matchMedia('(max-width: 767px)').matches) {
-      alert('Salva il certificato come PDF per stamparlo più tardi!');
-    } else {
-      setTimeout(() => {
-        printWindow.print();
-      }, 1000); // Aumentato il tempo di attesa per il caricamento delle immagini
-    }
+    printWindow.document.write(certificateContent);
+    printWindow.document.close();
   }
   
   // Add event listeners when the page loads

@@ -1,5 +1,5 @@
 body {
-  font-family: 'Comic Neue', cursive;
+  font-family: 'Comic Neue', 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive;
   margin: 0;
   padding: 10px;
   background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
@@ -325,5 +325,21 @@ button:hover, button:active {
   button {
     display: none !important;
   }
+}
+
+@font-face {
+  font-family: 'Comic Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/comicneue/v6/4UaHrEJDsxBrF37olUeD96rp57F2IwM.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Comic Neue';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/comicneue/v6/4UaErEJDsxBrF37olUeD_xHM8pxULilENlY.woff2') format('woff2');
 }
   

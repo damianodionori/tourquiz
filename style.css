@@ -148,254 +148,222 @@ button:hover, button:active {
 }
 
 .certificate {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 2rem;
+  background: linear-gradient(180deg, #e6f3ff 0%, #ffffff 100%);
+  padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   text-align: center;
   position: relative;
-  max-width: 800px;
-  margin: 2rem auto;
-  border: 2px solid #3498db;
-  overflow: hidden;
-}
-
-/* Museum-specific themes */
-.certificate.british-museum {
-  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-  border-color: #c0392b;
-}
-
-.certificate.natural-history {
-  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
-  border-color: #27ae60;
-}
-
-.certificate.westminster {
-  background: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
-  border-color: #8e44ad;
+  margin: 20px auto 40px;
+  max-width: 600px;
+  border: 3px solid #4CAF50;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
 
 .certificate-content {
   position: relative;
-  z-index: 2;
-  padding: 2rem;
+  padding: 20px;
+  margin: 10px;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .museum-icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  display: block;
-}
-
-.decorative-corner {
+  font-size: 2.5em;
+  margin: 10px;
   position: absolute;
-  font-size: 2rem;
-  padding: 1rem;
-  opacity: 0.7;
-  animation: float 3s ease-in-out infinite;
+  top: 10px;
+  right: 10px;
 }
 
-.decorative-corner:nth-child(1) { top: 0; left: 0; }
-.decorative-corner:nth-child(2) { top: 0; right: 0; }
-.decorative-corner:nth-child(3) { bottom: 0; left: 0; }
-.decorative-corner:nth-child(4) { bottom: 0; right: 0; }
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+.small-dino {
+  font-size: 1.2em;
+  margin: 0 10px;
 }
 
 #certificate-title {
-  font-size: 2.5rem;
-  color: #2c3e50;
-  margin: 1rem 0;
+  color: #1a4e1a;
+  font-size: 2em;
   font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  line-height: 1.4;
+  margin: 20px 0;
+  font-family: 'Comic Neue', cursive;
+  text-align: center;
 }
 
-#certificate-intro,
-#certificate-achievement,
-#certificate-praise {
-  font-size: 1.2rem;
-  color: #34495e;
-  margin: 1rem 0;
+.certificate-text {
+  font-size: 1.3em;
+  color: #333;
   line-height: 1.6;
+  margin: 10px 0;
+  font-family: 'Comic Neue', cursive;
 }
 
 #child-name {
-  font-size: 1.8em;
+  font-size: 2em;
   font-family: 'Comic Neue', cursive;
-  font-style: italic;
   text-align: center;
   border: none;
-  border-bottom: 1px solid #000;
-  margin: 20px auto;
-  padding: 5px 20px;
+  border-bottom: 2px solid #4CAF50;
+  margin: 15px 0;
+  padding: 5px 0;
   width: 80%;
-  max-width: 800px;
   background: transparent;
-  color: #000;
-  outline: none;
-  text-decoration: none;
-  box-sizing: border-box;
+  color: #1a4e1a;
+  font-style: italic;
 }
 
 #child-name:focus {
-  border-bottom: 2px solid #3498db;
+  outline: none;
+  border-bottom: 2px solid #1a4e1a;
 }
 
-#final-score {
-  font-size: 1.5rem;
-  color: #27ae60;
-  font-weight: bold;
-  margin: 1rem 0;
-}
-
+.certificate-score, 
 .certificate-date {
-  font-style: italic;
-  color: #7f8c8d;
-  margin: 1rem 0;
-}
-
-.certificate-seal {
-  width: 100px;
-  height: 100px;
-  margin: 1.5rem auto;
-  border: 2px solid #3498db;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+  font-size: 1.2em;
+  color: #1a4e1a;
+  margin: 10px 0;
+  font-family: 'Comic Neue', cursive;
 }
 
 .certificate-buttons {
   display: flex;
-  gap: 1rem;
   justify-content: center;
-  margin-top: 2rem;
+  gap: 20px;
+  margin: 30px 0 50px;
 }
 
 .certificate-button {
-  padding: 0.8rem 1.5rem;
+  background-color: #4CAF50;
+  color: white;
   border: none;
+  padding: 12px 25px;
   border-radius: 25px;
-  font-size: 1.1rem;
   cursor: pointer;
+  font-size: 1.1em;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 10px;
+  font-family: 'Comic Neue', cursive;
+}
+
+.certificate-button:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
 }
 
 #download-certificate {
-  background-color: #3498db;
-  color: white;
+  background-color: #4CAF50;
 }
 
 #download-certificate:hover {
-  background-color: #2980b9;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+  background-color: #45a049;
 }
 
 #restart-btn {
-  background-color: #e74c3c;
-  color: white;
+  background-color: #2196F3;
 }
 
 #restart-btn:hover {
-  background-color: #c0392b;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+  background-color: #1976D2;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
+.certificate-button i {
+  transition: transform 0.3s ease;
+}
+
+.certificate-button:hover i {
+  transform: scale(1.2);
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 1cm;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: none;
+  }
+
+  .container {
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+  }
+
+  .language-switcher,
+  .quiz-buttons,
+  .certificate-buttons {
+    display: none !important;
+  }
+
   .certificate {
-    margin: 1rem;
-    padding: 1rem;
+    border: 3px solid #4CAF50;
+    box-shadow: none;
+    margin: 0;
+    padding: 20px;
+    background: #ffffff;
+  }
+
+  .certificate-content {
+    padding: 20px;
   }
 
   #certificate-title {
-    font-size: 2rem;
+    font-size: 24px;
+    margin: 20px 0;
   }
 
-  .museum-icon {
-    font-size: 3rem;
-  }
-
-  .decorative-corner {
-    font-size: 1.5rem;
-  }
-
-  .certificate-button {
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  #certificate-title {
-    font-size: 1.8rem;
-  }
-
-  #certificate-intro,
-  #certificate-achievement,
-  #certificate-praise {
-    font-size: 1rem;
+  .certificate-text {
+    font-size: 16px;
+    margin: 10px 0;
   }
 
   #child-name {
-    font-size: 1.6rem;
+    font-size: 20px;
+    margin: 15px 0;
+    border-bottom: 1px solid #4CAF50;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .certificate {
+    margin: 10px auto 30px;
+    padding: 20px;
+  }
+
+  .certificate-content {
+    padding: 10px;
+  }
+
+  #certificate-title {
+    font-size: 1.5em;
+  }
+
+  .certificate-text {
+    font-size: 1.1em;
+  }
+
+  #child-name {
+    font-size: 1.6em;
+    width: 90%;
   }
 
   .certificate-buttons {
     flex-direction: column;
+    margin: 20px 0 40px;
   }
 
   .certificate-button {
     width: 100%;
-  }
-}
-
-@media print {
-  /* Hide everything except the certificate */
-  body * {
-    visibility: hidden;
-  }
-  
-  .certificate,
-  .certificate * {
-    visibility: visible;
-  }
-  
-  .certificate {
-    box-shadow: none;
-    margin: 0;
-    padding: 20px;
-  }
-
-  .certificate-buttons {
-    display: none;
-  }
-
-  #child-name {
-    font-style: italic;
-    border: none;
-    border-bottom: 1px solid #000;
-    text-decoration: none;
-    padding: 5px 20px;
-    color: #000 !important;
+    justify-content: center;
   }
 }
 

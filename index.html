@@ -59,34 +59,31 @@
 
     <div id="certificate-container" style="display: none;">
       <div class="certificate">
-        <div class="certificate-background"></div>
-        <div class="decorative-corner">🎨</div>
-        <div class="decorative-corner">📚</div>
-        <div class="decorative-corner">🎭</div>
-        <div class="decorative-corner">🏛️</div>
+        <div class="museum-icon">🦕</div>
         <div class="certificate-content">
-          <div class="museum-icon">🏛️</div>
-          <h2 id="certificate-title"></h2>
-          <div id="certificate-content">
-            <p class="certificate-text" id="certificate-intro"></p>
-            <input type="text" id="child-name" placeholder="Inserisci il tuo nome" autocomplete="off">
-            <p class="certificate-text" id="certificate-achievement"></p>
-            <p class="certificate-text" id="certificate-praise"></p>
-            <p class="certificate-score">Punteggio finale: <span id="final-score">0</span></p>
-            <p class="certificate-date">Data: <span id="current-date"></span></p>
-            <div class="certificate-seal">
-              <i class="fas fa-award"></i>
-            </div>
+          <h2 id="certificate-title">
+            <span class="small-dino">🦕</span> 
+            Natural History Museum Young Scientist Certificate 
+            <span class="small-dino">🦕</span>
+          </h2>
+          <p class="certificate-text" id="certificate-intro">This is to certify that</p>
+          <input type="text" id="child-name" placeholder="Enter your name">
+          <p class="certificate-text" id="certificate-achievement">has successfully completed the Natural History Museum Tour Quiz</p>
+          <p class="certificate-text" id="certificate-praise">demonstrating exceptional knowledge of nature, dinosaurs, and science!</p>
+          <p class="certificate-score">Final score: <span id="final-score">0</span></p>
+          <p class="certificate-date">Date: <span id="current-date"></span></p>
+          <div class="certificate-seal">
+            <i class="fas fa-award"></i>
           </div>
-          
-          <div class="certificate-buttons">
-            <button class="certificate-button" id="download-certificate">
-              <i class="fas fa-download"></i> <span class="print-text">Scarica Certificato</span>
-            </button>
-            <button class="certificate-button" id="restart-btn">
-              <i class="fas fa-redo"></i> <span class="restart-text">Ricomincia Quiz</span>
-            </button>
-          </div>
+        </div>
+        
+        <div class="certificate-buttons">
+          <button class="certificate-button" id="download-certificate">
+            <i class="fas fa-print"></i> <span class="print-text">Print Certificate</span>
+          </button>
+          <button class="certificate-button" id="restart-btn">
+            <i class="fas fa-redo"></i> <span class="restart-text">Restart Quiz</span>
+          </button>
         </div>
       </div>
     </div>

@@ -186,7 +186,9 @@ const tours = {
                 score: "Score",
                 next: "Next",
                 back: "Go back",
-                congrats: "Congratulations!"
+                congrats: "Congratulations!",
+                cardTitle: "British Museum",
+                cardDescription: "Explore ancient civilizations and incredible artifacts!"
             },
             it: {
                 title: "British Museum Quiz per Piccoli Esploratori!",
@@ -197,7 +199,9 @@ const tours = {
                 score: "Punteggio",
                 next: "Avanti",
                 back: "Indietro",
-                congrats: "Congratulazioni!"
+                congrats: "Congratulazioni!",
+                cardTitle: "British Museum",
+                cardDescription: "Esplora antiche civiltà e incredibili manufatti!"
             }
         }
     },
@@ -377,26 +381,30 @@ const tours = {
         },
         translations: {
             en: {
-                title: "Natural History Museum Quiz for Young Scientists!",
+                title: "Natural History Museum Quiz for Young Explorers!",
                 chooseDifficulty: "Choose your difficulty level:",
                 easy: "Easy",
                 medium: "Medium",
                 hard: "Hard",
                 score: "Score",
                 next: "Next",
-                back: "Back to selection",
-                congrats: "Congratulations!"
+                back: "Go back",
+                congrats: "Congratulations!",
+                cardTitle: "Natural History Museum",
+                cardDescription: "Discover dinosaurs and the wonders of nature!"
             },
             it: {
-                title: "Quiz del Museo di Storia Naturale per Giovani Scienziati!",
+                title: "Natural History Museum Quiz per Piccoli Esploratori!",
                 chooseDifficulty: "Scegli il livello di difficoltà:",
                 easy: "Facile",
                 medium: "Medio",
                 hard: "Difficile",
                 score: "Punteggio",
                 next: "Avanti",
-                back: "Torna alla selezione",
-                congrats: "Congratulazioni!"
+                back: "Indietro",
+                congrats: "Congratulazioni!",
+                cardTitle: "Museo di Storia Naturale",
+                cardDescription: "Scopri i dinosauri e le meraviglie della natura!"
             }
         }
     },
@@ -576,26 +584,30 @@ const tours = {
         },
         translations: {
             en: {
-                title: "Westminster Walking Tour Quiz!",
+                title: "Westminster Walking Tour Quiz for Young Explorers!",
                 chooseDifficulty: "Choose your difficulty level:",
                 easy: "Easy",
                 medium: "Medium",
                 hard: "Hard",
                 score: "Score",
                 next: "Next",
-                back: "Back to selection",
-                congrats: "Congratulations!"
+                back: "Go back",
+                congrats: "Congratulations!",
+                cardTitle: "Westminster Walking Tour",
+                cardDescription: "Walk through the heart of London's history!"
             },
             it: {
-                title: "Quiz del Tour a Piedi di Westminster!",
+                title: "Westminster Walking Tour Quiz per Piccoli Esploratori!",
                 chooseDifficulty: "Scegli il livello di difficoltà:",
                 easy: "Facile",
                 medium: "Medio",
                 hard: "Difficile",
                 score: "Punteggio",
                 next: "Avanti",
-                back: "Torna alla selezione",
-                congrats: "Congratulazioni!"
+                back: "Indietro",
+                congrats: "Congratulazioni!",
+                cardTitle: "Tour a Piedi di Westminster",
+                cardDescription: "Cammina nel cuore della storia di Londra!"
             }
         }
     }
@@ -897,33 +909,38 @@ function changeLanguage(lang) {
 }
 
 function updatePageLanguage() {
-    const mainTitle = document.querySelector('#main-title');
-    if (currentTour) {
-        mainTitle.textContent = tours[currentTour].translations[currentLanguage].title;
-    } else {
-        // Update home page content
-        mainTitle.textContent = homeTranslations[currentLanguage].title;
-        
-        // Update tour cards
-        document.querySelector('[data-tour="british-museum"] h2').textContent = 
-            homeTranslations[currentLanguage].britishMuseum.title;
-        document.querySelector('[data-tour="british-museum"] p').textContent = 
-            homeTranslations[currentLanguage].britishMuseum.description;
-            
-        document.querySelector('[data-tour="natural-history"] h2').textContent = 
-            homeTranslations[currentLanguage].naturalHistory.title;
-        document.querySelector('[data-tour="natural-history"] p').textContent = 
-            homeTranslations[currentLanguage].naturalHistory.description;
-            
-        document.querySelector('[data-tour="westminster"] h2').textContent = 
-            homeTranslations[currentLanguage].westminster.title;
-        document.querySelector('[data-tour="westminster"] p').textContent = 
-            homeTranslations[currentLanguage].westminster.description;
-    }
+    const currentLang = document.documentElement.lang;
+    const elements = document.querySelectorAll('[data-translate]');
     
-    // Update other elements if needed
-    if (currentTour && document.querySelector('#difficulty-selection')) {
-        showDifficultySelection();
+    elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        const [tourId, translationKey] = key.split('-');
+        
+        if (tours[tourId] && tours[tourId].translations && tours[tourId].translations[currentLang]) {
+            element.textContent = tours[tourId].translations[currentLang][translationKey];
+        }
+    });
+
+    // Update other UI elements
+    document.getElementById('main-title').textContent = currentLang === 'en' ? 'Choose Your London Adventure!' : 'Scegli la Tua Avventura a Londra!';
+    
+    // Update certificate text
+    if (document.getElementById('certificate-container').style.display !== 'none') {
+        const certificateElements = {
+            'certificate-title': currentLang === 'en' ? 'Certificate of Achievement' : 'Certificato di Merito',
+            'certificate-intro': currentLang === 'en' ? 'This is to certify that' : 'Si certifica che',
+            'certificate-achievement': currentLang === 'en' ? 'has successfully completed the' : 'ha completato con successo il',
+            'certificate-praise': currentLang === 'en' ? 'Great job exploring London!' : 'Ottimo lavoro nell\'esplorare Londra!',
+            'print-text': currentLang === 'en' ? 'Print Certificate' : 'Stampa Certificato',
+            'restart-text': currentLang === 'en' ? 'Restart Quiz' : 'Ricomincia Quiz'
+        };
+
+        for (const [id, text] of Object.entries(certificateElements)) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.textContent = text;
+            }
+        }
     }
 }
 

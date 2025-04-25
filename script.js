@@ -394,7 +394,7 @@ const tours = {
                 cardDescription: "Discover dinosaurs and the wonders of nature!"
             },
             it: {
-                title: "Natural History Museum Quiz per Piccoli Esploratori!",
+                title: "Quiz del Museo di Storia Naturale per Piccoli Esploratori!",
                 chooseDifficulty: "Scegli il livello di difficoltà:",
                 easy: "Facile",
                 medium: "Medio",
@@ -597,7 +597,7 @@ const tours = {
                 cardDescription: "Walk through the heart of London's history!"
             },
             it: {
-                title: "Westminster Walking Tour Quiz per Piccoli Esploratori!",
+                title: "Quiz del Tour a Piedi di Westminster per Piccoli Esploratori!",
                 chooseDifficulty: "Scegli il livello di difficoltà:",
                 easy: "Facile",
                 medium: "Medio",
@@ -606,7 +606,7 @@ const tours = {
                 next: "Avanti",
                 back: "Indietro",
                 congrats: "Congratulazioni!",
-                cardTitle: "Tour a Piedi di Westminster",
+                cardTitle: "Westminster Walking Tour",
                 cardDescription: "Cammina nel cuore della storia di Londra!"
             }
         }
@@ -621,7 +621,7 @@ const certificateTranslations = {
             intro: "This is to certify that",
             achievement: "has successfully completed the British Museum Tour Quiz",
             praise: "demonstrating extraordinary knowledge of the museum's history and treasures!",
-            print: "Print Certificate",
+            print: "Download Certificate",
             restart: "Restart Quiz"
         },
         it: {
@@ -629,7 +629,7 @@ const certificateTranslations = {
             intro: "Con grande piacere si certifica che",
             achievement: "ha completato con successo il Tour Quiz del British Museum",
             praise: "dimostrando una straordinaria conoscenza della storia e dei tesori del museo!",
-            print: "Stampa Certificato",
+            print: "Scarica Certificato",
             restart: "Ricomincia Quiz"
         }
     },
@@ -639,7 +639,7 @@ const certificateTranslations = {
             intro: "This is to certify that",
             achievement: "has successfully completed the Natural History Museum Tour Quiz",
             praise: "demonstrating exceptional knowledge of nature, dinosaurs, and science!",
-            print: "Print Certificate",
+            print: "Download Certificate",
             restart: "Restart Quiz"
         },
         it: {
@@ -647,7 +647,7 @@ const certificateTranslations = {
             intro: "Con grande piacere si certifica che",
             achievement: "ha completato con successo il Tour Quiz del Museo di Storia Naturale",
             praise: "dimostrando eccezionale conoscenza della natura, dei dinosauri e della scienza!",
-            print: "Stampa Certificato",
+            print: "Scarica Certificato",
             restart: "Ricomincia Quiz"
         }
     },
@@ -657,7 +657,7 @@ const certificateTranslations = {
             intro: "This is to certify that",
             achievement: "has successfully completed the Westminster Walking Tour Quiz",
             praise: "demonstrating remarkable knowledge of London's historic Westminster area!",
-            print: "Print Certificate",
+            print: "Download Certificate",
             restart: "Restart Quiz"
         },
         it: {
@@ -665,7 +665,7 @@ const certificateTranslations = {
             intro: "Con grande piacere si certifica che",
             achievement: "ha completato con successo il Tour Quiz di Westminster",
             praise: "dimostrando notevole conoscenza della storica area di Westminster di Londra!",
-            print: "Stampa Certificato",
+            print: "Scarica Certificato",
             restart: "Ricomincia Quiz"
         }
     }
@@ -700,8 +700,8 @@ const homeTranslations = {
             description: "Scopri i dinosauri e le meraviglie della natura!"
         },
         westminster: {
-            title: "Tour a Piedi di Westminster",
-            description: "Cammina attraverso il cuore della storia di Londra!"
+            title: "Westminster Walking Tour",
+            description: "Cammina nel cuore della storia di Londra!"
         },
         back: "Torna alla selezione"
     }
@@ -909,43 +909,52 @@ function changeLanguage(lang) {
 }
 
 function updatePageLanguage() {
-    const currentLang = document.documentElement.lang;
     const elements = document.querySelectorAll('[data-translate]');
     
     elements.forEach(element => {
         const key = element.getAttribute('data-translate');
         const [tourId, translationKey] = key.split('-');
         
-        if (tours[tourId] && tours[tourId].translations && tours[tourId].translations[currentLang]) {
-            element.textContent = tours[tourId].translations[currentLang][translationKey];
+        if (tours[tourId] && tours[tourId].translations && tours[tourId].translations[currentLanguage]) {
+            element.textContent = tours[tourId].translations[currentLanguage][translationKey];
         }
     });
 
-    // Update other UI elements
-    document.getElementById('main-title').textContent = currentLang === 'en' ? 'Choose Your London Adventure!' : 'Scegli la Tua Avventura a Londra!';
+    // Update main title
+    document.getElementById('main-title').textContent = homeTranslations[currentLanguage].title;
     
-    // Update certificate text
+    // Update certificate text if visible
     if (document.getElementById('certificate-container').style.display !== 'none') {
-        const certificateElements = {
-            'certificate-title': currentLang === 'en' ? 'Certificate of Achievement' : 'Certificato di Merito',
-            'certificate-intro': currentLang === 'en' ? 'This is to certify that' : 'Si certifica che',
-            'certificate-achievement': currentLang === 'en' ? 'has successfully completed the' : 'ha completato con successo il',
-            'certificate-praise': currentLang === 'en' ? 'Great job exploring London!' : 'Ottimo lavoro nell\'esplorare Londra!',
-            'print-text': currentLang === 'en' ? 'Print Certificate' : 'Stampa Certificato',
-            'restart-text': currentLang === 'en' ? 'Restart Quiz' : 'Ricomincia Quiz'
-        };
-
-        for (const [id, text] of Object.entries(certificateElements)) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.textContent = text;
-            }
-        }
+        const certTranslations = certificateTranslations[currentTour][currentLanguage];
+        document.querySelector('#certificate-title').textContent = certTranslations.title;
+        document.querySelector('#certificate-intro').textContent = certTranslations.intro;
+        document.querySelector('#certificate-achievement').textContent = certTranslations.achievement;
+        document.querySelector('#certificate-praise').textContent = certTranslations.praise;
+        document.querySelector('.print-text').textContent = certTranslations.print;
+        document.querySelector('.restart-text').textContent = certTranslations.restart;
     }
 }
 
 function showCertificate() {
     const certTranslations = certificateTranslations[currentTour][currentLanguage];
+    
+    // Add museum-specific class for theming
+    const certificate = document.querySelector('.certificate');
+    certificate.className = `certificate ${currentTour}`;
+    
+    // Update museum icon based on tour
+    const museumIcon = document.querySelector('.museum-icon');
+    switch(currentTour) {
+        case 'british-museum':
+            museumIcon.textContent = '🏛️';
+            break;
+        case 'natural-history':
+            museumIcon.textContent = '🦕';
+            break;
+        case 'westminster':
+            museumIcon.textContent = '⚜️';
+            break;
+    }
     
     document.querySelector('#certificate-title').textContent = certTranslations.title;
     document.querySelector('#certificate-intro').textContent = certTranslations.intro;
@@ -954,19 +963,52 @@ function showCertificate() {
     document.querySelector('.print-text').textContent = certTranslations.print;
     document.querySelector('.restart-text').textContent = certTranslations.restart;
     document.querySelector('#final-score').textContent = score;
+    document.querySelector('#current-date').textContent = new Date().toLocaleDateString();
+    
+    // Update decorative corners based on tour
+    const corners = document.querySelectorAll('.decorative-corner');
+    let cornerIcons;
+    switch(currentTour) {
+        case 'british-museum':
+            cornerIcons = ['🏺', '📜', '👑', '🗿'];
+            break;
+        case 'natural-history':
+            cornerIcons = ['🦕', '🦖', '🦴', '🌍'];
+            break;
+        case 'westminster':
+            cornerIcons = ['👑', '⚜️', '🏰', '🎭'];
+            break;
+    }
+    corners.forEach((corner, index) => {
+        corner.textContent = cornerIcons[index];
+    });
     
     document.querySelector('#quiz-container').style.display = 'none';
     document.querySelector('#certificate-container').style.display = 'block';
-    
+
     // Add event listeners for certificate buttons
-    document.querySelector('#print-certificate').addEventListener('click', () => {
-        window.print();
-    });
+    const downloadBtn = document.querySelector('#download-certificate');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', () => {
+            // Nascondi temporaneamente i pulsanti per la stampa
+            const buttons = document.querySelector('.certificate-buttons');
+            buttons.style.display = 'none';
+            
+            // Stampa il certificato
+            window.print();
+            
+            // Mostra nuovamente i pulsanti dopo la stampa
+            buttons.style.display = 'flex';
+        });
+    }
     
-    document.querySelector('#restart-btn').addEventListener('click', () => {
-        document.querySelector('#certificate-container').style.display = 'none';
-        goBack();
-    });
+    const restartBtn = document.querySelector('#restart-btn');
+    if (restartBtn) {
+        restartBtn.addEventListener('click', () => {
+            document.querySelector('#certificate-container').style.display = 'none';
+            goBack();
+        });
+    }
 }
 
 function goBackToTours() {

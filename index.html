@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
   <div class="language-switcher">
@@ -57,18 +59,29 @@
 
     <div id="certificate-container" style="display: none;">
       <div class="certificate">
-        <h2 id="certificate-title"></h2>
-        <div id="certificate-content">
-          <p class="certificate-text" id="certificate-intro"></p>
-          <input type="text" id="child-name" placeholder="Inserisci il tuo nome" autocomplete="off">
-          <p class="certificate-text" id="certificate-achievement"></p>
-          <p class="certificate-text" id="certificate-praise"></p>
-          <p class="certificate-score">Punteggio finale: <span id="final-score">0</span></p>
-          <p class="certificate-date">Data: <span id="current-date"></span><div class="certificate-seal"><i class="fas fa-award"></i></div></p>
+        <div class="certificate-background"></div>
+        <div class="decorative-corner">🎨</div>
+        <div class="decorative-corner">📚</div>
+        <div class="decorative-corner">🎭</div>
+        <div class="decorative-corner">🏛️</div>
+        <div class="certificate-content">
+          <div class="museum-icon">🏛️</div>
+          <h2 id="certificate-title"></h2>
+          <div id="certificate-content">
+            <p class="certificate-text" id="certificate-intro"></p>
+            <input type="text" id="child-name" placeholder="Inserisci il tuo nome" autocomplete="off">
+            <p class="certificate-text" id="certificate-achievement"></p>
+            <p class="certificate-text" id="certificate-praise"></p>
+            <p class="certificate-score">Punteggio finale: <span id="final-score">0</span></p>
+            <p class="certificate-date">Data: <span id="current-date"></span></p>
+            <div class="certificate-seal">
+              <i class="fas fa-award"></i>
+            </div>
+          </div>
           
           <div class="certificate-buttons">
-            <button class="certificate-button" id="print-certificate">
-              <i class="fas fa-print"></i> <span class="print-text">Stampa Certificato</span>
+            <button class="certificate-button" id="download-certificate">
+              <i class="fas fa-download"></i> <span class="print-text">Scarica Certificato</span>
             </button>
             <button class="certificate-button" id="restart-btn">
               <i class="fas fa-redo"></i> <span class="restart-text">Ricomincia Quiz</span>

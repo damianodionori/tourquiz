@@ -12,11 +12,31 @@
   <div class="container">
     <h1>🏛️ British Museum Quiz per Piccoli Esploratori! 🏛️</h1>
     
-    <div id="quiz-container">
+    <div id="difficulty-selection" class="difficulty-container">
+      <h2>Scegli il livello di difficoltà:</h2>
+      <div class="difficulty-buttons">
+        <button class="difficulty-btn" data-difficulty="easy">
+          <i class="fas fa-star"></i> Facile (5-7 anni)
+        </button>
+        <button class="difficulty-btn" data-difficulty="medium">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i> Medio (8-10 anni)
+        </button>
+        <button class="difficulty-btn" data-difficulty="hard">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> Difficile (11+ anni)
+        </button>
+      </div>
+    </div>
+
+    <div id="quiz-container" style="display: none;">
       <div id="score-display">Punteggio: <span id="score">0</span></div>
       <div id="question">Domanda qui</div>
       <div id="answer-buttons" class="btn-container"></div>
-      <button id="next-btn">Avanti</button>
+      <div class="quiz-buttons">
+        <button id="next-btn">Avanti</button>
+        <button id="back-btn" class="back-button">
+          <i class="fas fa-arrow-left"></i> Torna alla home
+        </button>
+      </div>
     </div>
 
     <div id="certificate-container" style="display: none;">

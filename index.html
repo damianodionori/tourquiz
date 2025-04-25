@@ -1,72 +1,77 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>British Museum Quiz per Piccoli Esploratori</title>
+  <title>London Educational Tours</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-  <div class="container">
-    <div class="language-switcher">
-      <button class="lang-btn active" data-lang="it">
-        <img src="https://flagcdn.com/w40/it.png" alt="Italiano" width="20">
-        <span>IT</span>
-      </button>
-      <button class="lang-btn" data-lang="en">
-        <img src="https://flagcdn.com/w40/gb.png" alt="English" width="20">
-        <span>EN</span>
-      </button>
-    </div>
+  <div class="language-switcher">
+    <button class="lang-btn active" onclick="changeLanguage('en')">
+      <img src="https://flagcdn.com/w20/gb.png" alt="English"> EN
+    </button>
+    <button class="lang-btn" onclick="changeLanguage('it')">
+      <img src="https://flagcdn.com/w20/it.png" alt="Italiano"> IT
+    </button>
+  </div>
 
-    <h1>🏛️ British Museum Quiz per Piccoli Esploratori! 🏛️</h1>
+  <div class="container">
+    <h1 id="main-title">Choose Your London Adventure!</h1>
     
-    <div id="difficulty-selection" class="difficulty-container">
-      <h2>Scegli il livello di difficoltà:</h2>
-      <div class="difficulty-buttons">
-        <button class="difficulty-btn" data-difficulty="easy">
-          <i class="fas fa-star"></i> Facile
-        </button>
-        <button class="difficulty-btn" data-difficulty="medium">
-          <i class="fas fa-star"></i><i class="fas fa-star"></i> Medio
-        </button>
-        <button class="difficulty-btn" data-difficulty="hard">
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> Difficile
-        </button>
+    <div class="tours-container">
+      <div class="tour-card" data-tour="british-museum" onclick="startTour('british-museum')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/British_Museum_from_NE_2.JPG" alt="British Museum" loading="lazy">
+        <h2>British Museum</h2>
+        <p>Explore ancient civilizations and incredible artifacts!</p>
+      </div>
+
+      <div class="tour-card" data-tour="natural-history" onclick="startTour('natural-history')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Natural_History_Museum_London_Jan_2006.jpg" alt="Natural History Museum" loading="lazy">
+        <h2>Natural History Museum</h2>
+        <p>Discover dinosaurs and the wonders of nature!</p>
+      </div>
+
+      <div class="tour-card" data-tour="westminster" onclick="startTour('westminster')">
+        <img src="https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg" alt="Westminster Walking Tour" loading="lazy">
+        <h2>Westminster Walking Tour</h2>
+        <p>Walk through the heart of London's history!</p>
       </div>
     </div>
 
     <div id="quiz-container" style="display: none;">
-      <div id="score-display">Punteggio: <span id="score">0</span></div>
-      <div id="question">Domanda qui</div>
-      <div id="answer-buttons" class="btn-container"></div>
+      <div id="score-display"></div>
+      <div id="question"></div>
+      <div class="btn-container"></div>
       <div class="quiz-buttons">
-        <button id="next-btn">Avanti</button>
-        <button id="back-btn" class="back-button">
-          <i class="fas fa-arrow-left"></i> Torna alla selezione
+        <button class="back-button" onclick="goBack()">
+          <i class="fas fa-arrow-left"></i> <span class="back-text">Go back</span>
+        </button>
+        <button id="next-btn" style="display: none;" onclick="nextQuestion()">
+          <i class="fas fa-arrow-right"></i> <span class="next-text">Next</span>
         </button>
       </div>
     </div>
 
     <div id="certificate-container" style="display: none;">
       <div class="certificate">
-        <h2>🏛️ Certificato di Piccolo Esploratore del British Museum 🏛️</h2>
+        <h2 id="certificate-title"></h2>
         <div id="certificate-content">
-          <p class="certificate-text">Con grande piacere si certifica che</p>
+          <p class="certificate-text" id="certificate-intro"></p>
           <input type="text" id="child-name" placeholder="Inserisci il tuo nome" autocomplete="off">
-          <p class="certificate-text">ha completato con successo il Tour Quiz del British Museum</p>
-          <p class="certificate-text">dimostrando una straordinaria conoscenza della storia e dei tesori del museo!</p>
+          <p class="certificate-text" id="certificate-achievement"></p>
+          <p class="certificate-text" id="certificate-praise"></p>
           <p class="certificate-score">Punteggio finale: <span id="final-score">0</span></p>
-          <p class="certificate-date">Data: <span id="current-date"></span></p>
+          <p class="certificate-date">Data: <span id="current-date"></span><div class="certificate-seal"><i class="fas fa-award"></i></div></p>
           
           <div class="certificate-buttons">
             <button class="certificate-button" id="print-certificate">
-              <i class="fas fa-print"></i> Stampa Certificato
+              <i class="fas fa-print"></i> <span class="print-text">Stampa Certificato</span>
             </button>
             <button class="certificate-button" id="restart-btn">
-              <i class="fas fa-redo"></i> Ricomincia Quiz
+              <i class="fas fa-redo"></i> <span class="restart-text">Ricomincia Quiz</span>
             </button>
           </div>
         </div>
@@ -76,7 +81,7 @@
   
   <script src="script.js"></script>
   <script>
-    document.getElementById('current-date').textContent = new Date().toLocaleDateString('it-IT');
+    document.getElementById('current-date').textContent = new Date().toLocaleDateString();
   </script>
 </body>
 </html>

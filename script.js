@@ -1,988 +1,974 @@
 console.log("Quiz pronto!");
 
-const translations = {
-  it: {
-    title: "🏛️ British Museum Quiz per Piccoli Esploratori! 🏛️",
-    difficultyTitle: "Scegli il livello di difficoltà:",
-    easy: "Facile",
-    medium: "Medio",
-    hard: "Difficile",
-    score: "Punteggio:",
-    next: "Avanti",
-    back: "Torna alla selezione",
-    certificateTitle: "🏛️ Certificato di Piccolo Esploratore del British Museum 🏛️",
-    certificateText1: "Con grande piacere si certifica che",
-    certificateText2: "ha completato con successo il Tour Quiz del British Museum",
-    certificateText3: "dimostrando una straordinaria conoscenza della storia e dei tesori del museo!",
-    finalScore: "Punteggio finale:",
-    printCertificate: "Stampa Certificato",
-    restart: "Ricomincia Quiz",
-    namePlaceholder: "Inserisci il tuo nome",
-    questions: {
-      easy: [
-        {
-          question: "Dove si trova il British Museum?",
-          answers: [
-            { text: "Londra", correct: true },
-            { text: "Parigi", correct: false },
-            { text: "Roma", correct: false },
-            { text: "New York", correct: false }
-          ]
+// Tour data
+const tours = {
+    'british-museum': {
+        questions: {
+            easy: [
+                {
+                    question: {
+                        en: "Where is the British Museum located?",
+                        it: "Dove si trova il British Museum?"
+                    },
+                    answers: {
+                        en: ["London", "Paris", "Rome", "New York"],
+                        it: ["Londra", "Parigi", "Roma", "New York"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "Which of these famous objects is in the British Museum?",
+                        it: "Quale di questi oggetti famosi si trova al British Museum?"
+                    },
+                    answers: {
+                        en: ["The Rosetta Stone", "Mona Lisa", "Venus de Milo", "David"],
+                        it: ["La Stele di Rosetta", "La Gioconda", "La Venere di Milo", "Il David"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What color is the Rosetta Stone?",
+                        it: "Di che colore è la Stele di Rosetta?"
+                    },
+                    answers: {
+                        en: ["Dark grey", "White", "Red", "Green"],
+                        it: ["Grigio scuro", "Bianco", "Rosso", "Verde"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "Which animal is often found in Egyptian works?",
+                        it: "Quale di questi animali si trova spesso nelle opere egizie?"
+                    },
+                    answers: {
+                        en: ["Cat", "Dog", "Horse", "Lion"],
+                        it: ["Il gatto", "Il cane", "Il cavallo", "Il leone"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What do the Lewis Chessmen represent?",
+                        it: "Cosa rappresentano gli Scacchi di Lewis?"
+                    },
+                    answers: {
+                        en: ["Warriors and kings", "Animals", "Plants", "Houses"],
+                        it: ["Guerrieri e re", "Animali", "Piante", "Case"]
+                    },
+                    correct: 0
+                }
+            ],
+            medium: [
+                {
+                    question: {
+                        en: "What material is the Rosetta Stone made of?",
+                        it: "Di che materiale è fatta la Stele di Rosetta?"
+                    },
+                    answers: {
+                        en: ["Granite", "Bronze", "Marble", "Gold"],
+                        it: ["Granito", "Bronzo", "Marmo", "Oro"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "Which of these objects was found in the Hebrides?",
+                        it: "Quale di questi oggetti è stato trovato nelle Isole Ebridi?"
+                    },
+                    answers: {
+                        en: ["The Lewis Chessmen", "The Rosetta Stone", "The Parthenon Marbles", "The Moai"],
+                        it: ["Gli Scacchi di Lewis", "La Stele di Rosetta", "I Marmi del Partenone", "Il Moai"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "When was the Rosetta Stone found?",
+                        it: "In quale anno è stata trovata la Stele di Rosetta?"
+                    },
+                    answers: {
+                        en: ["1799", "1801", "1798", "1800"],
+                        it: ["1799", "1801", "1798", "1800"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "Who deciphered the hieroglyphs using the Rosetta Stone?",
+                        it: "Chi ha decifrato i geroglifici usando la Stele di Rosetta?"
+                    },
+                    answers: {
+                        en: ["Jean-François Champollion", "Napoleon Bonaparte", "Howard Carter", "Lord Elgin"],
+                        it: ["Jean-François Champollion", "Napoleone Bonaparte", "Howard Carter", "Lord Elgin"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "Where do the Parthenon Marbles come from?",
+                        it: "Da dove provengono i Marmi del Partenone?"
+                    },
+                    answers: {
+                        en: ["Athens, Greece", "Rome, Italy", "Cairo, Egypt", "Mexico City"],
+                        it: ["Atene, Grecia", "Roma, Italia", "Il Cairo, Egitto", "Città del Messico"]
+                    },
+                    correct: 0
+                }
+            ],
+            hard: [
+                {
+                    question: {
+                        en: "Why is the Rosetta Stone so important?",
+                        it: "Perché la Stele di Rosetta è così importante?"
+                    },
+                    answers: {
+                        en: ["It helped decipher Egyptian hieroglyphs", "It's made of gold", "It's the largest Egyptian stele", "It's over 5000 years old"],
+                        it: ["Ha aiutato a decifrare i geroglifici egizi", "È fatta d'oro", "È la più grande stele egizia", "Ha più di 5000 anni"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "Which Egyptian dynasty created the Rosetta Stone?",
+                        it: "Quale dinastia egizia ha creato la Stele di Rosetta?"
+                    },
+                    answers: {
+                        en: ["Ptolemaic Dynasty", "Ramesside Dynasty", "Amarna Dynasty", "Saite Dynasty"],
+                        it: ["Dinastia tolemaica", "Dinastia ramesside", "Dinastia amarniana", "Dinastia saita"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "In what languages is the Rosetta Stone written?",
+                        it: "In quale lingua è scritta la Stele di Rosetta?"
+                    },
+                    answers: {
+                        en: ["Ancient Greek, Demotic and hieroglyphs", "Latin, Greek and hieroglyphs", "Aramaic, Greek and hieroglyphs", "Coptic, Greek and hieroglyphs"],
+                        it: ["Greco antico, demotico e geroglifici", "Latino, greco e geroglifici", "Aramaico, greco e geroglifici", "Copto, greco e geroglifici"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What is an Assyrian Lamassu?",
+                        it: "Quale di questi oggetti è un Lamassu assiro?"
+                    },
+                    answers: {
+                        en: ["A statue with human head and winged bull body", "A winged lion statue", "A sphinx statue", "A griffin statue"],
+                        it: ["Una statua con testa umana e corpo di toro alato", "Una statua di leone alato", "Una statua di sfinge", "Una statua di grifone"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "Where do the Assyrian Lamassu come from?",
+                        it: "Da dove provengono i Lamassu assiri?"
+                    },
+                    answers: {
+                        en: ["Assyrian palaces of Nimrud and Khorsabad", "Babylonian temples", "Egyptian pyramids", "Greek temples"],
+                        it: ["Palazzi assiri di Nimrud e Khorsabad", "Templi babilonesi", "Piramidi egizie", "Templi greci"]
+                    },
+                    correct: 0
+                }
+            ]
         },
-        {
-          question: "Quale di questi oggetti famosi si trova al British Museum?",
-          answers: [
-            { text: "La Stele di Rosetta", correct: true },
-            { text: "La Gioconda", correct: false },
-            { text: "La Venere di Milo", correct: false },
-            { text: "Il David", correct: false }
-          ]
-        },
-        {
-          question: "Di che colore è la Stele di Rosetta?",
-          answers: [
-            { text: "Grigio scuro", correct: true },
-            { text: "Bianco", correct: false },
-            { text: "Rosso", correct: false },
-            { text: "Verde", correct: false }
-          ]
-        },
-        {
-          question: "Quale di questi animali si trova spesso nelle opere egizie?",
-          answers: [
-            { text: "Il gatto", correct: true },
-            { text: "Il cane", correct: false },
-            { text: "Il cavallo", correct: false },
-            { text: "Il leone", correct: false }
-          ]
-        },
-        {
-          question: "Cosa rappresentano gli Scacchi di Lewis?",
-          answers: [
-            { text: "Guerrieri e re", correct: true },
-            { text: "Animali", correct: false },
-            { text: "Piante", correct: false },
-            { text: "Case", correct: false }
-          ]
-        },
-        {
-          question: "Quale di questi oggetti è fatto di pietra?",
-          answers: [
-            { text: "Il Moai", correct: true },
-            { text: "Gli Scacchi di Lewis", correct: false },
-            { text: "Il Serpente a Due Teste", correct: false },
-            { text: "La Maschera di Tutankhamon", correct: false }
-          ]
-        },
-        {
-          question: "Da dove viene il Moai?",
-          answers: [
-            { text: "Isola di Pasqua", correct: true },
-            { text: "Hawaii", correct: false },
-            { text: "Nuova Zelanda", correct: false },
-            { text: "Tahiti", correct: false }
-          ]
-        },
-        {
-          question: "Quale di questi oggetti è più antico?",
-          answers: [
-            { text: "La Stele di Rosetta", correct: true },
-            { text: "Gli Scacchi di Lewis", correct: false },
-            { text: "I Marmi del Partenone", correct: false },
-            { text: "Il Moai", correct: false }
-          ]
-        },
-        {
-          question: "Cosa si trova in cima al Moai?",
-          answers: [
-            { text: "Un cappello di pietra rossa", correct: true },
-            { text: "Una corona", correct: false },
-            { text: "Un elmo", correct: false },
-            { text: "Un cappello di paglia", correct: false }
-          ]
-        },
-        {
-          question: "Quale di questi oggetti è più grande?",
-          answers: [
-            { text: "Il Moai", correct: true },
-            { text: "La Stele di Rosetta", correct: false },
-            { text: "Gli Scacchi di Lewis", correct: false },
-            { text: "I Marmi del Partenone", correct: false }
-          ]
+        translations: {
+            en: {
+                title: "British Museum Quiz for Young Explorers!",
+                chooseDifficulty: "Choose your difficulty level:",
+                easy: "Easy",
+                medium: "Medium",
+                hard: "Hard",
+                score: "Score",
+                next: "Next",
+                back: "Go back",
+                congrats: "Congratulations!"
+            },
+            it: {
+                title: "British Museum Quiz per Piccoli Esploratori!",
+                chooseDifficulty: "Scegli il livello di difficoltà:",
+                easy: "Facile",
+                medium: "Medio",
+                hard: "Difficile",
+                score: "Punteggio",
+                next: "Avanti",
+                back: "Indietro",
+                congrats: "Congratulazioni!"
+            }
         }
-      ],
-      medium: [
-        {
-          question: "Di che materiale è fatta la Stele di Rosetta?",
-          answers: [
-            { text: "Granito", correct: true },
-            { text: "Bronzo", correct: false },
-            { text: "Marmo", correct: false },
-            { text: "Oro", correct: false }
-          ]
+    },
+    'natural-history': {
+        questions: {
+            easy: [
+                {
+                    question: {
+                        en: "What famous creature greets visitors in the main hall?",
+                        it: "Quale famosa creatura accoglie i visitatori nella sala principale?"
+                    },
+                    answers: {
+                        en: ["A blue whale", "A T-Rex", "A mammoth", "A giraffe"],
+                        it: ["Una balena blu", "Un T-Rex", "Un mammut", "Una giraffa"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What color is the famous dinosaur skeleton in the main hall?",
+                        it: "Di che colore è il famoso scheletro di dinosauro nella sala principale?"
+                    },
+                    answers: {
+                        en: ["White/Beige", "Brown", "Black", "Grey"],
+                        it: ["Bianco/Beige", "Marrone", "Nero", "Grigio"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What is the name of the famous T-Rex in the museum?",
+                        it: "Come si chiama il famoso T-Rex nel museo?"
+                    },
+                    answers: {
+                        en: ["Sophie", "Rex", "Tommy", "Bob"],
+                        it: ["Sophie", "Rex", "Tommy", "Bob"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What can you find in the Red Zone?",
+                        it: "Cosa puoi trovare nella Zona Rossa?"
+                    },
+                    answers: {
+                        en: ["Volcanoes and earthquakes", "Dinosaurs", "Animals", "Plants"],
+                        it: ["Vulcani e terremoti", "Dinosauri", "Animali", "Piante"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What is the color of the building's exterior?",
+                        it: "Di che colore è l'esterno dell'edificio?"
+                    },
+                    answers: {
+                        en: ["Terracotta and blue", "White and grey", "Red and black", "Yellow and brown"],
+                        it: ["Terracotta e blu", "Bianco e grigio", "Rosso e nero", "Giallo e marrone"]
+                    },
+                    correct: 0
+                }
+            ],
+            medium: [
+                {
+                    question: {
+                        en: "How long is the blue whale model in the main hall?",
+                        it: "Quanto è lungo il modello della balena blu nella sala principale?"
+                    },
+                    answers: {
+                        en: ["25 meters", "15 meters", "35 meters", "20 meters"],
+                        it: ["25 metri", "15 metri", "35 metri", "20 metri"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What is the name of the earthquake simulator?",
+                        it: "Come si chiama il simulatore di terremoti?"
+                    },
+                    answers: {
+                        en: ["Kobe", "Tokyo", "San Francisco", "Mexico City"],
+                        it: ["Kobe", "Tokyo", "San Francisco", "Città del Messico"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "Which famous architect designed the building?",
+                        it: "Quale famoso architetto ha progettato l'edificio?"
+                    },
+                    answers: {
+                        en: ["Alfred Waterhouse", "Christopher Wren", "John Nash", "Charles Barry"],
+                        it: ["Alfred Waterhouse", "Christopher Wren", "John Nash", "Charles Barry"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "When did the museum first open?",
+                        it: "Quando è stato aperto il museo per la prima volta?"
+                    },
+                    answers: {
+                        en: ["1881", "1901", "1851", "1891"],
+                        it: ["1881", "1901", "1851", "1891"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What is stored in the Cocoon building?",
+                        it: "Cosa è conservato nell'edificio Cocoon?"
+                    },
+                    answers: {
+                        en: ["Scientific specimens", "Live animals", "Fossils", "Art pieces"],
+                        it: ["Campioni scientifici", "Animali vivi", "Fossili", "Opere d'arte"]
+                    },
+                    correct: 0
+                }
+            ],
+            hard: [
+                {
+                    question: {
+                        en: "How many specimens are housed in the museum?",
+                        it: "Quanti campioni sono conservati nel museo?"
+                    },
+                    answers: {
+                        en: ["Over 80 million", "Over 50 million", "Over 30 million", "Over 100 million"],
+                        it: ["Più di 80 milioni", "Più di 50 milioni", "Più di 30 milioni", "Più di 100 milioni"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "Which famous scientist's specimens are kept in the museum?",
+                        it: "I campioni di quale famoso scienziato sono conservati nel museo?"
+                    },
+                    answers: {
+                        en: ["Charles Darwin", "Isaac Newton", "Albert Einstein", "Marie Curie"],
+                        it: ["Charles Darwin", "Isaac Newton", "Albert Einstein", "Marie Curie"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What is the weight of the blue whale model?",
+                        it: "Quanto pesa il modello della balena blu?"
+                    },
+                    answers: {
+                        en: ["4.5 tonnes", "3.5 tonnes", "5.5 tonnes", "2.5 tonnes"],
+                        it: ["4.5 tonnellate", "3.5 tonnellate", "5.5 tonnellate", "2.5 tonnellate"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What was the original name of the museum?",
+                        it: "Qual era il nome originale del museo?"
+                    },
+                    answers: {
+                        en: ["British Museum (Natural History)", "South Kensington Museum", "Imperial Museum", "Royal Natural History Museum"],
+                        it: ["British Museum (Natural History)", "South Kensington Museum", "Imperial Museum", "Royal Natural History Museum"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What is the rarest specimen in the museum?",
+                        it: "Qual è il campione più raro nel museo?"
+                    },
+                    answers: {
+                        en: ["Archaeopteryx fossil", "T-Rex skull", "Dodo bones", "Mammoth hair"],
+                        it: ["Fossile di Archaeopteryx", "Cranio di T-Rex", "Ossa di Dodo", "Pelo di mammut"]
+                    },
+                    correct: 0
+                }
+            ]
         },
-        {
-          question: "Quale di questi oggetti è stato trovato nelle Isole Ebridi?",
-          answers: [
-            { text: "Gli Scacchi di Lewis", correct: true },
-            { text: "La Stele di Rosetta", correct: false },
-            { text: "I Marmi del Partenone", correct: false },
-            { text: "Il Moai", correct: false }
-          ]
-        },
-        {
-          question: "In quale anno è stata trovata la Stele di Rosetta?",
-          answers: [
-            { text: "1799", correct: true },
-            { text: "1801", correct: false },
-            { text: "1798", correct: false },
-            { text: "1800", correct: false }
-          ]
-        },
-        {
-          question: "Chi ha decifrato i geroglifici usando la Stele di Rosetta?",
-          answers: [
-            { text: "Jean-François Champollion", correct: true },
-            { text: "Napoleone Bonaparte", correct: false },
-            { text: "Howard Carter", correct: false },
-            { text: "Lord Elgin", correct: false }
-          ]
-        },
-        {
-          question: "Da dove provengono i Marmi del Partenone?",
-          answers: [
-            { text: "Atene, Grecia", correct: true },
-            { text: "Roma, Italia", correct: false },
-            { text: "Il Cairo, Egitto", correct: false },
-            { text: "Città del Messico", correct: false }
-          ]
-        },
-        {
-          question: "Quale di questi è un oggetto azteco?",
-          answers: [
-            { text: "Il Serpente a Due Teste", correct: true },
-            { text: "La Stele di Rosetta", correct: false },
-            { text: "Gli Scacchi di Lewis", correct: false },
-            { text: "I Marmi del Partenone", correct: false }
-          ]
-        },
-        {
-          question: "In quale secolo sono stati trovati gli Scacchi di Lewis?",
-          answers: [
-            { text: "XIX secolo", correct: true },
-            { text: "XVIII secolo", correct: false },
-            { text: "XX secolo", correct: false },
-            { text: "XVII secolo", correct: false }
-          ]
-        },
-        {
-          question: "Quale di questi oggetti è fatto di turchese?",
-          answers: [
-            { text: "Il Serpente a Due Teste", correct: true },
-            { text: "La Stele di Rosetta", correct: false },
-            { text: "Gli Scacchi di Lewis", correct: false },
-            { text: "I Marmi del Partenone", correct: false }
-          ]
-        },
-        {
-          question: "Chi ha portato i Marmi del Partenone al British Museum?",
-          answers: [
-            { text: "Lord Elgin", correct: true },
-            { text: "Napoleone", correct: false },
-            { text: "Howard Carter", correct: false },
-            { text: "Champollion", correct: false }
-          ]
-        },
-        {
-          question: "In quale anno sono stati trovati gli Scacchi di Lewis?",
-          answers: [
-            { text: "1831", correct: true },
-            { text: "1830", correct: false },
-            { text: "1832", correct: false },
-            { text: "1829", correct: false }
-          ]
+        translations: {
+            en: {
+                title: "Natural History Museum Quiz for Young Scientists!",
+                chooseDifficulty: "Choose your difficulty level:",
+                easy: "Easy",
+                medium: "Medium",
+                hard: "Hard",
+                score: "Score",
+                next: "Next",
+                back: "Back to selection",
+                congrats: "Congratulations!"
+            },
+            it: {
+                title: "Quiz del Museo di Storia Naturale per Giovani Scienziati!",
+                chooseDifficulty: "Scegli il livello di difficoltà:",
+                easy: "Facile",
+                medium: "Medio",
+                hard: "Difficile",
+                score: "Punteggio",
+                next: "Avanti",
+                back: "Torna alla selezione",
+                congrats: "Congratulazioni!"
+            }
         }
-      ],
-      hard: [
-        {
-          question: "Perché la Stele di Rosetta è così importante?",
-          answers: [
-            { text: "Ha aiutato a decifrare i geroglifici egizi", correct: true },
-            { text: "È fatta d'oro", correct: false },
-            { text: "È la più grande stele egizia", correct: false },
-            { text: "Ha più di 5000 anni", correct: false }
-          ]
+    },
+    'westminster': {
+        questions: {
+            easy: [
+                {
+                    question: {
+                        en: "What is the famous clock tower in Westminster called?",
+                        it: "Come si chiama la famosa torre dell'orologio di Westminster?"
+                    },
+                    answers: {
+                        en: ["Big Ben", "Tower Bridge", "London Eye", "The Shard"],
+                        it: ["Big Ben", "Tower Bridge", "London Eye", "The Shard"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What color are the typical London phone boxes?",
+                        it: "Di che colore sono le tipiche cabine telefoniche di Londra?"
+                    },
+                    answers: {
+                        en: ["Red", "Blue", "Black", "Green"],
+                        it: ["Rosse", "Blu", "Nere", "Verdi"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What is the name of the famous bridge near Big Ben?",
+                        it: "Come si chiama il famoso ponte vicino a Big Ben?"
+                    },
+                    answers: {
+                        en: ["Westminster Bridge", "London Bridge", "Tower Bridge", "Waterloo Bridge"],
+                        it: ["Westminster Bridge", "London Bridge", "Tower Bridge", "Waterloo Bridge"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What color is Westminster Bridge?",
+                        it: "Di che colore è il Westminster Bridge?"
+                    },
+                    answers: {
+                        en: ["Green", "Red", "Blue", "Black"],
+                        it: ["Verde", "Rosso", "Blu", "Nero"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What famous residence is near Westminster?",
+                        it: "Quale famosa residenza si trova vicino a Westminster?"
+                    },
+                    answers: {
+                        en: ["Buckingham Palace", "Tower of London", "Windsor Castle", "Kensington Palace"],
+                        it: ["Buckingham Palace", "Torre di Londra", "Castello di Windsor", "Palazzo di Kensington"]
+                    },
+                    correct: 0
+                }
+            ],
+            medium: [
+                {
+                    question: {
+                        en: "How many clock faces does Big Ben have?",
+                        it: "Quanti quadranti ha Big Ben?"
+                    },
+                    answers: {
+                        en: ["4", "2", "3", "1"],
+                        it: ["4", "2", "3", "1"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What is the real name of Big Ben?",
+                        it: "Qual è il vero nome di Big Ben?"
+                    },
+                    answers: {
+                        en: ["Elizabeth Tower", "Victoria Tower", "Clock Tower", "Westminster Tower"],
+                        it: ["Elizabeth Tower", "Victoria Tower", "Clock Tower", "Westminster Tower"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What year was Westminster Palace built?",
+                        it: "In che anno è stato costruito il Palazzo di Westminster?"
+                    },
+                    answers: {
+                        en: ["1840", "1820", "1860", "1880"],
+                        it: ["1840", "1820", "1860", "1880"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What is the name of the square in front of Big Ben?",
+                        it: "Come si chiama la piazza di fronte a Big Ben?"
+                    },
+                    answers: {
+                        en: ["Parliament Square", "Westminster Square", "Queen's Square", "Victoria Square"],
+                        it: ["Parliament Square", "Westminster Square", "Queen's Square", "Victoria Square"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What famous abbey is in Westminster?",
+                        it: "Quale famosa abbazia si trova a Westminster?"
+                    },
+                    answers: {
+                        en: ["Westminster Abbey", "St Paul's Cathedral", "St James Abbey", "Royal Abbey"],
+                        it: ["Westminster Abbey", "Cattedrale di St Paul", "Abbazia di St James", "Abbazia Reale"]
+                    },
+                    correct: 0
+                }
+            ],
+            hard: [
+                {
+                    question: {
+                        en: "How many bells are inside Big Ben?",
+                        it: "Quante campane ci sono dentro Big Ben?"
+                    },
+                    answers: {
+                        en: ["5", "3", "4", "6"],
+                        it: ["5", "3", "4", "6"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What is the weight of Big Ben's main bell?",
+                        it: "Quanto pesa la campana principale di Big Ben?"
+                    },
+                    answers: {
+                        en: ["13.7 tonnes", "10.5 tonnes", "15.1 tonnes", "12.2 tonnes"],
+                        it: ["13.7 tonnellate", "10.5 tonnellate", "15.1 tonnellate", "12.2 tonnellate"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "Who designed the current Houses of Parliament?",
+                        it: "Chi ha progettato le attuali Houses of Parliament?"
+                    },
+                    answers: {
+                        en: ["Charles Barry", "Christopher Wren", "John Nash", "William Kent"],
+                        it: ["Charles Barry", "Christopher Wren", "John Nash", "William Kent"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What year did Big Ben first chime?",
+                        it: "In quale anno Big Ben ha suonato per la prima volta?"
+                    },
+                    answers: {
+                        en: ["1859", "1849", "1869", "1879"],
+                        it: ["1859", "1849", "1869", "1879"]
+                    },
+                    correct: 0
+                },
+                {
+                    question: {
+                        en: "What style of architecture is Westminster Palace?",
+                        it: "Quale stile architettonico ha il Palazzo di Westminster?"
+                    },
+                    answers: {
+                        en: ["Gothic Revival", "Baroque", "Georgian", "Victorian"],
+                        it: ["Neogotico", "Barocco", "Georgiano", "Vittoriano"]
+                    },
+                    correct: 0
+                }
+            ]
         },
-        {
-          question: "Quale dinastia egizia ha creato la Stele di Rosetta?",
-          answers: [
-            { text: "Dinastia tolemaica", correct: true },
-            { text: "Dinastia ramesside", correct: false },
-            { text: "Dinastia amarniana", correct: false },
-            { text: "Dinastia saita", correct: false }
-          ]
-        },
-        {
-          question: "In quale lingua è scritta la Stele di Rosetta?",
-          answers: [
-            { text: "Greco antico, demotico e geroglifici", correct: true },
-            { text: "Latino, greco e geroglifici", correct: false },
-            { text: "Aramaico, greco e geroglifici", correct: false },
-            { text: "Copto, greco e geroglifici", correct: false }
-          ]
-        },
-        {
-          question: "Quale di questi oggetti è un Lamassu assiro?",
-          answers: [
-            { text: "Una statua con testa umana e corpo di toro alato", correct: true },
-            { text: "Una statua di leone alato", correct: false },
-            { text: "Una statua di sfinge", correct: false },
-            { text: "Una statua di grifone", correct: false }
-          ]
-        },
-        {
-          question: "Da dove provengono i Lamassu assiri?",
-          answers: [
-            { text: "Palazzi assiri di Nimrud e Khorsabad", correct: true },
-            { text: "Templi babilonesi", correct: false },
-            { text: "Piramidi egizie", correct: false },
-            { text: "Templi greci", correct: false }
-          ]
-        },
-        {
-          question: "Quale di questi oggetti è fatto di turchese?",
-          answers: [
-            { text: "Il Serpente a Due Teste", correct: true },
-            { text: "La Stele di Rosetta", correct: false },
-            { text: "Gli Scacchi di Lewis", correct: false },
-            { text: "I Marmi del Partenone", correct: false }
-          ]
-        },
-        {
-          question: "Chi ha portato i Marmi del Partenone al British Museum?",
-          answers: [
-            { text: "Lord Elgin", correct: true },
-            { text: "Napoleone", correct: false },
-            { text: "Howard Carter", correct: false },
-            { text: "Champollion", correct: false }
-          ]
-        },
-        {
-          question: "Quale parte del Partenone mostra la lotta tra Lapiti e Centauri?",
-          answers: [
-            { text: "Le Metope", correct: true },
-            { text: "Il Fregio", correct: false },
-            { text: "Il Frontone", correct: false },
-            { text: "L'Acropoli", correct: false }
-          ]
-        },
-        {
-          question: "In quale periodo è stato creato il Serpente a Due Teste?",
-          answers: [
-            { text: "Periodo post-classico azteco", correct: true },
-            { text: "Periodo classico maya", correct: false },
-            { text: "Periodo olmeco", correct: false },
-            { text: "Periodo tolteco", correct: false }
-          ]
-        },
-        {
-          question: "Chi ha inventato la cioccolata calda?",
-          answers: [
-            { text: "Sir Hans Sloane", correct: true },
-            { text: "Leonardo da Vinci", correct: false },
-            { text: "Charles Dickens", correct: false },
-            { text: "William Shakespeare", correct: false }
-          ]
+        translations: {
+            en: {
+                title: "Westminster Walking Tour Quiz!",
+                chooseDifficulty: "Choose your difficulty level:",
+                easy: "Easy",
+                medium: "Medium",
+                hard: "Hard",
+                score: "Score",
+                next: "Next",
+                back: "Back to selection",
+                congrats: "Congratulations!"
+            },
+            it: {
+                title: "Quiz del Tour a Piedi di Westminster!",
+                chooseDifficulty: "Scegli il livello di difficoltà:",
+                easy: "Facile",
+                medium: "Medio",
+                hard: "Difficile",
+                score: "Punteggio",
+                next: "Avanti",
+                back: "Torna alla selezione",
+                congrats: "Congratulazioni!"
+            }
         }
-      ]
     }
-  },
-  en: {
-    title: "🏛️ British Museum Quiz for Little Explorers! 🏛️",
-    difficultyTitle: "Choose difficulty level:",
-    easy: "Easy",
-    medium: "Medium",
-    hard: "Hard",
-    score: "Score:",
-    next: "Next",
-    back: "Back to selection",
-    certificateTitle: "🏛️ British Museum Explorer Certificate 🏛️",
-    certificateText1: "This is to certify that",
-    certificateText2: "has successfully completed the British Museum Tour Quiz",
-    certificateText3: "demonstrating extraordinary knowledge of the museum's history and treasures!",
-    finalScore: "Final Score:",
-    printCertificate: "Print Certificate",
-    restart: "Restart Quiz",
-    namePlaceholder: "Enter your name",
-    questions: {
-      easy: [
-        {
-          question: "Where is the British Museum located?",
-          answers: [
-            { text: "London", correct: true },
-            { text: "Paris", correct: false },
-            { text: "Rome", correct: false },
-            { text: "New York", correct: false }
-          ]
-        },
-        {
-          question: "Which of these famous objects is in the British Museum?",
-          answers: [
-            { text: "The Rosetta Stone", correct: true },
-            { text: "The Mona Lisa", correct: false },
-            { text: "The Venus de Milo", correct: false },
-            { text: "The David", correct: false }
-          ]
-        },
-        {
-          question: "What color is the Rosetta Stone?",
-          answers: [
-            { text: "Dark grey", correct: true },
-            { text: "White", correct: false },
-            { text: "Red", correct: false },
-            { text: "Green", correct: false }
-          ]
-        },
-        {
-          question: "Which of these animals is often found in Egyptian art?",
-          answers: [
-            { text: "The cat", correct: true },
-            { text: "The dog", correct: false },
-            { text: "The horse", correct: false },
-            { text: "The lion", correct: false }
-          ]
-        },
-        {
-          question: "What do the Lewis Chessmen represent?",
-          answers: [
-            { text: "Warriors and kings", correct: true },
-            { text: "Animals", correct: false },
-            { text: "Plants", correct: false },
-            { text: "Houses", correct: false }
-          ]
-        },
-        {
-          question: "Which of these objects is made of stone?",
-          answers: [
-            { text: "The Moai", correct: true },
-            { text: "The Lewis Chessmen", correct: false },
-            { text: "The Double-headed Serpent", correct: false },
-            { text: "The Mask of Tutankhamun", correct: false }
-          ]
-        },
-        {
-          question: "Where does the Moai come from?",
-          answers: [
-            { text: "Easter Island", correct: true },
-            { text: "Hawaii", correct: false },
-            { text: "New Zealand", correct: false },
-            { text: "Tahiti", correct: false }
-          ]
-        },
-        {
-          question: "Which of these objects is the oldest?",
-          answers: [
-            { text: "The Rosetta Stone", correct: true },
-            { text: "The Lewis Chessmen", correct: false },
-            { text: "The Parthenon Marbles", correct: false },
-            { text: "The Moai", correct: false }
-          ]
-        },
-        {
-          question: "What is on top of the Moai?",
-          answers: [
-            { text: "A red stone hat", correct: true },
-            { text: "A crown", correct: false },
-            { text: "A helmet", correct: false },
-            { text: "A straw hat", correct: false }
-          ]
-        },
-        {
-          question: "Which of these objects is the largest?",
-          answers: [
-            { text: "The Moai", correct: true },
-            { text: "The Rosetta Stone", correct: false },
-            { text: "The Lewis Chessmen", correct: false },
-            { text: "The Parthenon Marbles", correct: false }
-          ]
-        }
-      ],
-      medium: [
-        {
-          question: "What material is the Rosetta Stone made of?",
-          answers: [
-            { text: "Granite", correct: true },
-            { text: "Bronze", correct: false },
-            { text: "Marble", correct: false },
-            { text: "Gold", correct: false }
-          ]
-        },
-        {
-          question: "Which of these objects was found in the Hebrides?",
-          answers: [
-            { text: "The Lewis Chessmen", correct: true },
-            { text: "The Rosetta Stone", correct: false },
-            { text: "The Parthenon Marbles", correct: false },
-            { text: "The Moai", correct: false }
-          ]
-        },
-        {
-          question: "In which year was the Rosetta Stone found?",
-          answers: [
-            { text: "1799", correct: true },
-            { text: "1801", correct: false },
-            { text: "1798", correct: false },
-            { text: "1800", correct: false }
-          ]
-        },
-        {
-          question: "Who deciphered hieroglyphs using the Rosetta Stone?",
-          answers: [
-            { text: "Jean-François Champollion", correct: true },
-            { text: "Napoleon Bonaparte", correct: false },
-            { text: "Howard Carter", correct: false },
-            { text: "Lord Elgin", correct: false }
-          ]
-        },
-        {
-          question: "Where do the Parthenon Marbles come from?",
-          answers: [
-            { text: "Athens, Greece", correct: true },
-            { text: "Rome, Italy", correct: false },
-            { text: "Cairo, Egypt", correct: false },
-            { text: "Mexico City", correct: false }
-          ]
-        },
-        {
-          question: "Which of these is an Aztec object?",
-          answers: [
-            { text: "The Double-headed Serpent", correct: true },
-            { text: "The Rosetta Stone", correct: false },
-            { text: "The Lewis Chessmen", correct: false },
-            { text: "The Parthenon Marbles", correct: false }
-          ]
-        },
-        {
-          question: "In which century were the Lewis Chessmen found?",
-          answers: [
-            { text: "19th century", correct: true },
-            { text: "18th century", correct: false },
-            { text: "20th century", correct: false },
-            { text: "17th century", correct: false }
-          ]
-        },
-        {
-          question: "Which of these objects is made of turquoise?",
-          answers: [
-            { text: "The Double-headed Serpent", correct: true },
-            { text: "The Rosetta Stone", correct: false },
-            { text: "The Lewis Chessmen", correct: false },
-            { text: "The Parthenon Marbles", correct: false }
-          ]
-        },
-        {
-          question: "Who brought the Parthenon Marbles to the British Museum?",
-          answers: [
-            { text: "Lord Elgin", correct: true },
-            { text: "Napoleon", correct: false },
-            { text: "Howard Carter", correct: false },
-            { text: "Champollion", correct: false }
-          ]
-        },
-        {
-          question: "In which year were the Lewis Chessmen found?",
-          answers: [
-            { text: "1831", correct: true },
-            { text: "1830", correct: false },
-            { text: "1832", correct: false },
-            { text: "1829", correct: false }
-          ]
-        }
-      ],
-      hard: [
-        {
-          question: "Why is the Rosetta Stone so important?",
-          answers: [
-            { text: "It helped decipher Egyptian hieroglyphs", correct: true },
-            { text: "It's made of gold", correct: false },
-            { text: "It's the largest Egyptian stele", correct: false },
-            { text: "It's over 5000 years old", correct: false }
-          ]
-        },
-        {
-          question: "Which Egyptian dynasty created the Rosetta Stone?",
-          answers: [
-            { text: "Ptolemaic dynasty", correct: true },
-            { text: "Ramesside dynasty", correct: false },
-            { text: "Amarna dynasty", correct: false },
-            { text: "Saite dynasty", correct: false }
-          ]
-        },
-        {
-          question: "In which language is the Rosetta Stone written?",
-          answers: [
-            { text: "Ancient Greek, Demotic, and Hieroglyphs", correct: true },
-            { text: "Latin, Greek, and Hieroglyphs", correct: false },
-            { text: "Aramaic, Greek, and Hieroglyphs", correct: false },
-            { text: "Coptic, Greek, and Hieroglyphs", correct: false }
-          ]
-        },
-        {
-          question: "Which of these objects is an Assyrian Lamassu?",
-          answers: [
-            { text: "A statue with human head and winged bull body", correct: true },
-            { text: "A winged lion statue", correct: false },
-            { text: "A sphinx statue", correct: false },
-            { text: "A griffin statue", correct: false }
-          ]
-        },
-        {
-          question: "Where do the Assyrian Lamassu come from?",
-          answers: [
-            { text: "Assyrian palaces of Nimrud and Khorsabad", correct: true },
-            { text: "Babylonian temples", correct: false },
-            { text: "Egyptian pyramids", correct: false },
-            { text: "Greek temples", correct: false }
-          ]
-        },
-        {
-          question: "Which of these objects is made of turquoise?",
-          answers: [
-            { text: "The Double-headed Serpent", correct: true },
-            { text: "The Rosetta Stone", correct: false },
-            { text: "The Lewis Chessmen", correct: false },
-            { text: "The Parthenon Marbles", correct: false }
-          ]
-        },
-        {
-          question: "Who brought the Parthenon Marbles to the British Museum?",
-          answers: [
-            { text: "Lord Elgin", correct: true },
-            { text: "Napoleon", correct: false },
-            { text: "Howard Carter", correct: false },
-            { text: "Champollion", correct: false }
-          ]
-        },
-        {
-          question: "Which part of the Parthenon shows the battle between Lapiths and Centaurs?",
-          answers: [
-            { text: "The Metopes", correct: true },
-            { text: "The Frieze", correct: false },
-            { text: "The Pediment", correct: false },
-            { text: "The Acropolis", correct: false }
-          ]
-        },
-        {
-          question: "In which period was the Double-headed Serpent created?",
-          answers: [
-            { text: "Aztec post-classic period", correct: true },
-            { text: "Maya classic period", correct: false },
-            { text: "Olmec period", correct: false },
-            { text: "Toltec period", correct: false }
-          ]
-        },
-        {
-          question: "Who invented hot chocolate?",
-          answers: [
-            { text: "Sir Hans Sloane", correct: true },
-            { text: "Leonardo da Vinci", correct: false },
-            { text: "Charles Dickens", correct: false },
-            { text: "William Shakespeare", correct: false }
-          ]
-        }
-      ]
-    }
-  }
 };
 
+// Aggiungiamo le traduzioni dei certificati per ogni tour
+const certificateTranslations = {
+    'british-museum': {
+        en: {
+            title: "🏛️ British Museum Young Explorer Certificate 🏛️",
+            intro: "This is to certify that",
+            achievement: "has successfully completed the British Museum Tour Quiz",
+            praise: "demonstrating extraordinary knowledge of the museum's history and treasures!",
+            print: "Print Certificate",
+            restart: "Restart Quiz"
+        },
+        it: {
+            title: "🏛️ Certificato di Piccolo Esploratore del British Museum 🏛️",
+            intro: "Con grande piacere si certifica che",
+            achievement: "ha completato con successo il Tour Quiz del British Museum",
+            praise: "dimostrando una straordinaria conoscenza della storia e dei tesori del museo!",
+            print: "Stampa Certificato",
+            restart: "Ricomincia Quiz"
+        }
+    },
+    'natural-history': {
+        en: {
+            title: "🦕 Natural History Museum Young Scientist Certificate 🦕",
+            intro: "This is to certify that",
+            achievement: "has successfully completed the Natural History Museum Tour Quiz",
+            praise: "demonstrating exceptional knowledge of nature, dinosaurs, and science!",
+            print: "Print Certificate",
+            restart: "Restart Quiz"
+        },
+        it: {
+            title: "🦕 Certificato di Giovane Scienziato del Museo di Storia Naturale 🦕",
+            intro: "Con grande piacere si certifica che",
+            achievement: "ha completato con successo il Tour Quiz del Museo di Storia Naturale",
+            praise: "dimostrando eccezionale conoscenza della natura, dei dinosauri e della scienza!",
+            print: "Stampa Certificato",
+            restart: "Ricomincia Quiz"
+        }
+    },
+    'westminster': {
+        en: {
+            title: "🏰 Westminster Walking Tour Explorer Certificate 🏰",
+            intro: "This is to certify that",
+            achievement: "has successfully completed the Westminster Walking Tour Quiz",
+            praise: "demonstrating remarkable knowledge of London's historic Westminster area!",
+            print: "Print Certificate",
+            restart: "Restart Quiz"
+        },
+        it: {
+            title: "🏰 Certificato di Esploratore del Tour di Westminster 🏰",
+            intro: "Con grande piacere si certifica che",
+            achievement: "ha completato con successo il Tour Quiz di Westminster",
+            praise: "dimostrando notevole conoscenza della storica area di Westminster di Londra!",
+            print: "Stampa Certificato",
+            restart: "Ricomincia Quiz"
+        }
+    }
+};
+
+// Aggiungiamo le traduzioni per la home page
+const homeTranslations = {
+    en: {
+        title: "Choose Your London Adventure!",
+        britishMuseum: {
+            title: "British Museum",
+            description: "Explore ancient civilizations and incredible artifacts!"
+        },
+        naturalHistory: {
+            title: "Natural History Museum",
+            description: "Discover dinosaurs and the wonders of nature!"
+        },
+        westminster: {
+            title: "Westminster Walking Tour",
+            description: "Walk through the heart of London's history!"
+        },
+        back: "Back to selection"
+    },
+    it: {
+        title: "Scegli La Tua Avventura a Londra!",
+        britishMuseum: {
+            title: "British Museum",
+            description: "Esplora antiche civiltà e incredibili manufatti!"
+        },
+        naturalHistory: {
+            title: "Museo di Storia Naturale",
+            description: "Scopri i dinosauri e le meraviglie della natura!"
+        },
+        westminster: {
+            title: "Tour a Piedi di Westminster",
+            description: "Cammina attraverso il cuore della storia di Londra!"
+        },
+        back: "Torna alla selezione"
+    }
+};
+
+let currentTour = null;
 let currentLanguage = 'it';
 let currentQuestions = [];
-
-function updateLanguage(lang) {
-  currentLanguage = lang;
-  document.querySelector('h1').textContent = translations[lang].title;
-  document.querySelector('.difficulty-container h2').textContent = translations[lang].difficultyTitle;
-  
-  const difficultyButtons = document.querySelectorAll('.difficulty-btn');
-  difficultyButtons[0].innerHTML = `<i class="fas fa-star"></i> ${translations[lang].easy}`;
-  difficultyButtons[1].innerHTML = `<i class="fas fa-star"></i><i class="fas fa-star"></i> ${translations[lang].medium}`;
-  difficultyButtons[2].innerHTML = `<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> ${translations[lang].hard}`;
-  
-  document.querySelector('#score-display').textContent = `${translations[lang].score} `;
-  document.querySelector('#next-btn').textContent = translations[lang].next;
-  document.querySelector('#back-btn').innerHTML = `<i class="fas fa-arrow-left"></i> ${translations[lang].back}`;
-  
-  document.querySelector('.certificate h2').textContent = translations[lang].certificateTitle;
-  document.querySelector('.certificate-text:nth-of-type(1)').textContent = translations[lang].certificateText1;
-  document.querySelector('.certificate-text:nth-of-type(2)').textContent = translations[lang].certificateText2;
-  document.querySelector('.certificate-text:nth-of-type(3)').textContent = translations[lang].certificateText3;
-  document.querySelector('.certificate-score').textContent = `${translations[lang].finalScore} `;
-  document.querySelector('#print-certificate').innerHTML = `<i class="fas fa-print"></i> ${translations[lang].printCertificate}`;
-  document.querySelector('#restart-btn').innerHTML = `<i class="fas fa-redo"></i> ${translations[lang].restart}`;
-  document.querySelector('#child-name').placeholder = translations[lang].namePlaceholder;
-  
-  // Update language buttons
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.remove('active');
-    if (btn.dataset.lang === lang) {
-      btn.classList.add('active');
-    }
-  });
-
-  // Update current questions if quiz is in progress
-  if (currentQuestions.length > 0) {
-    currentQuestions = translations[lang].questions[currentDifficulty];
-    showQuestion();
-  }
-}
-
-const questionElement = document.getElementById('question');
-const answerButtons = document.getElementById('answer-buttons');
-const nextButton = document.getElementById('next-btn');
-const scoreElement = document.getElementById('score');
-const certificateContainer = document.getElementById('certificate-container');
-const finalScoreElement = document.getElementById('final-score');
-const printCertificateButton = document.getElementById('print-certificate');
-const difficultySelection = document.getElementById('difficulty-selection');
-const quizContainer = document.getElementById('quiz-container');
-
 let currentQuestionIndex = 0;
 let score = 0;
-let currentDifficulty = '';
+
+function startTour(tourId) {
+    currentTour = tourId;
+    document.querySelector('.tours-container').style.display = 'none';
+    showDifficultySelection();
+}
+
+function showDifficultySelection() {
+    const container = document.querySelector('.container');
+    const translations = tours[currentTour].translations[currentLanguage];
+    
+    // Update title
+    document.querySelector('#main-title').textContent = translations.title;
+    
+    // Remove any existing difficulty selection
+    const existingDifficultySelection = document.querySelector('#difficulty-selection');
+    if (existingDifficultySelection) {
+        existingDifficultySelection.remove();
+    }
+    
+    // Create difficulty selection HTML
+    const difficultyHtml = `
+        <div id="difficulty-selection" class="difficulty-container">
+            <h2>${translations.chooseDifficulty}</h2>
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn" data-difficulty="easy">
+                    <i class="fas fa-star"></i> ${translations.easy}
+                </button>
+                <button class="difficulty-btn" data-difficulty="medium">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i> ${translations.medium}
+                </button>
+                <button class="difficulty-btn" data-difficulty="hard">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> ${translations.hard}
+                </button>
+            </div>
+            <button class="back-button" onclick="goBackToTours()">
+                <i class="fas fa-arrow-left"></i> ${homeTranslations[currentLanguage].back}
+            </button>
+        </div>
+    `;
+    
+    // Insert difficulty selection after title
+    const quizContainer = document.querySelector('#quiz-container');
+    quizContainer.insertAdjacentHTML('beforebegin', difficultyHtml);
+    
+    // Add event listeners to difficulty buttons
+    document.querySelectorAll('.difficulty-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            startQuiz(button.dataset.difficulty);
+        });
+    });
+}
 
 function startQuiz(difficulty) {
-  currentQuestionIndex = 0;
-  score = 0;
-  currentDifficulty = difficulty;
-  currentQuestions = translations[currentLanguage].questions[difficulty];
-  scoreElement.textContent = score;
-  nextButton.innerHTML = translations[currentLanguage].next;
-  certificateContainer.style.display = 'none';
-  difficultySelection.style.display = 'none';
-  quizContainer.style.display = 'block';
-  showQuestion();
+    currentQuestions = [...tours[currentTour].questions[difficulty]];
+    currentQuestionIndex = 0;
+    score = 0;
+    
+    // Hide difficulty selection and show quiz
+    document.querySelector('#difficulty-selection').style.display = 'none';
+    document.querySelector('#quiz-container').style.display = 'block';
+    
+    showQuestion();
 }
 
 function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
+    // Funzione di utilità per mescolare un array
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
 
 function showQuestion() {
-  resetState();
-  let currentQuestion = currentQuestions[currentQuestionIndex];
-  questionElement.innerText = currentQuestion.question;
-
-  const shuffledAnswers = shuffleArray([...currentQuestion.answers]);
-
-  shuffledAnswers.forEach(answer => {
-    const button = document.createElement('button');
-    button.innerText = answer.text;
-    button.classList.add('btn');
-    if (answer.correct) {
-      button.dataset.correct = answer.correct;
-    }
-    button.addEventListener('click', selectAnswer);
-    answerButtons.appendChild(button);
-  });
-}
-
-function resetState() {
-  nextButton.style.display = 'none';
-  while (answerButtons.firstChild) {
-    answerButtons.removeChild(answerButtons.firstChild);
-  }
-}
-
-function selectAnswer(e) {
-  const selectedBtn = e.target;
-  const isCorrect = selectedBtn.dataset.correct === "true";
-  
-  if (isCorrect) {
-    selectedBtn.classList.add('correct');
-    score += 10;
-    scoreElement.textContent = score;
-    nextButton.style.display = 'block';
-  } else {
-    selectedBtn.classList.add('incorrect');
-    // Show the correct answer
-    Array.from(answerButtons.children).forEach(button => {
-      if (button.dataset.correct === "true") {
-        button.classList.add('correct');
-      }
+    const question = currentQuestions[currentQuestionIndex];
+    const translations = tours[currentTour].translations[currentLanguage];
+    
+    document.querySelector('#score-display').textContent = `${translations.score}: ${score}`;
+    document.querySelector('#question').textContent = question.question[currentLanguage];
+    
+    const btnContainer = document.querySelector('.btn-container');
+    btnContainer.innerHTML = '';
+    
+    // Creiamo un array di oggetti che contiene sia la risposta che il suo indice originale
+    const answersWithIndex = question.answers[currentLanguage].map((answer, index) => ({
+        text: answer,
+        isCorrect: index === question.correct
+    }));
+    
+    // Mescoliamo l'array delle risposte
+    const shuffledAnswers = shuffleArray([...answersWithIndex]);
+    
+    // Creiamo i pulsanti con le risposte mescolate
+    shuffledAnswers.forEach((answer, index) => {
+        const button = document.createElement('button');
+        button.textContent = answer.text;
+        button.classList.add('btn');
+        button.addEventListener('click', () => selectAnswer(index, shuffledAnswers));
+        btnContainer.appendChild(button);
     });
-    // Allow retry after a short delay
-    setTimeout(() => {
-      resetState();
-      showQuestion();
-    }, 2000);
-  }
-
-  Array.from(answerButtons.children).forEach(button => {
-    button.disabled = true;
-  });
+    
+    // Update back button text
+    const backText = document.querySelector('.back-text');
+    if (backText) {
+        backText.textContent = homeTranslations[currentLanguage].back;
+    }
+    
+    // Update next button text
+    const nextText = document.querySelector('.next-text');
+    if (nextText) {
+        nextText.textContent = translations.next;
+    }
+    
+    document.querySelector('#next-btn').style.display = 'none';
 }
 
-function handleNextButton() {
-  currentQuestionIndex++;
-  if (currentQuestionIndex < currentQuestions.length) {
-    showQuestion();
-  } else {
-    showCertificate();
-  }
+function selectAnswer(selectedIndex, shuffledAnswers) {
+    const buttons = document.querySelectorAll('.btn');
+    
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
+    
+    // Troviamo l'indice della risposta corretta nell'array mescolato
+    const correctIndex = shuffledAnswers.findIndex(answer => answer.isCorrect);
+    
+    if (selectedIndex === correctIndex) {
+        buttons[selectedIndex].classList.add('correct');
+        score++;
+    } else {
+        buttons[selectedIndex].classList.add('incorrect');
+        buttons[correctIndex].classList.add('correct');
+    }
+    
+    document.querySelector('#score-display').textContent = 
+        `${tours[currentTour].translations[currentLanguage].score}: ${score}`;
+    document.querySelector('#next-btn').style.display = 'block';
+}
+
+function nextQuestion() {
+    currentQuestionIndex++;
+    
+    if (currentQuestionIndex < currentQuestions.length) {
+        showQuestion();
+    } else {
+        showCertificate();
+    }
+}
+
+function goBack() {
+    // Reset quiz state
+    currentQuestions = [];
+    currentQuestionIndex = 0;
+    score = 0;
+    
+    // Hide quiz container and show tour selection
+    document.querySelector('#quiz-container').style.display = 'none';
+    const difficultySelection = document.querySelector('#difficulty-selection');
+    if (difficultySelection) {
+        difficultySelection.remove();
+    }
+    document.querySelector('.tours-container').style.display = 'grid';
+    
+    // Reset title
+    updatePageLanguage();
+}
+
+function changeLanguage(lang) {
+    currentLanguage = lang;
+    
+    // Update active language button
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.querySelector('img').alt.toLowerCase().includes(lang)) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    // If we're in a quiz, update the quiz content
+    if (currentQuestions.length > 0) {
+        showQuestion();
+        return;
+    }
+    
+    // If we're in the difficulty selection screen, show it again
+    if (document.querySelector('#difficulty-selection')) {
+        showDifficultySelection();
+        return;
+    }
+    
+    // Otherwise, update the home page
+    updatePageLanguage();
+}
+
+function updatePageLanguage() {
+    const mainTitle = document.querySelector('#main-title');
+    if (currentTour) {
+        mainTitle.textContent = tours[currentTour].translations[currentLanguage].title;
+    } else {
+        // Update home page content
+        mainTitle.textContent = homeTranslations[currentLanguage].title;
+        
+        // Update tour cards
+        document.querySelector('[data-tour="british-museum"] h2').textContent = 
+            homeTranslations[currentLanguage].britishMuseum.title;
+        document.querySelector('[data-tour="british-museum"] p').textContent = 
+            homeTranslations[currentLanguage].britishMuseum.description;
+            
+        document.querySelector('[data-tour="natural-history"] h2').textContent = 
+            homeTranslations[currentLanguage].naturalHistory.title;
+        document.querySelector('[data-tour="natural-history"] p').textContent = 
+            homeTranslations[currentLanguage].naturalHistory.description;
+            
+        document.querySelector('[data-tour="westminster"] h2').textContent = 
+            homeTranslations[currentLanguage].westminster.title;
+        document.querySelector('[data-tour="westminster"] p').textContent = 
+            homeTranslations[currentLanguage].westminster.description;
+    }
+    
+    // Update other elements if needed
+    if (currentTour && document.querySelector('#difficulty-selection')) {
+        showDifficultySelection();
+    }
 }
 
 function showCertificate() {
-  quizContainer.style.display = 'none';
-  certificateContainer.style.display = 'block';
-  finalScoreElement.textContent = score;
-  
-  const nameInput = document.getElementById('child-name');
-  if (nameInput) {
-    nameInput.removeAttribute('readonly');
-    nameInput.removeAttribute('disabled');
-    nameInput.focus();
-  }
-}
-
-function printCertificate() {
-  const childName = document.getElementById('child-name').value || 'Piccolo Esploratore';
-  const currentDate = new Date().toLocaleDateString('it-IT');
-  
-  const printWindow = window.open('', '_blank');
-  if (!printWindow) {
-    alert('Per favore, permetti l\'apertura dei popup per stampare il certificato.');
-    return;
-  }
-
-  const certificateContent = `
-    <html>
-      <head>
-        <title>Certificato di Piccolo Esploratore</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
-        <style>
-          @media print {
-            body {
-              -webkit-print-color-adjust: exact !important;
-              print-color-adjust: exact !important;
-            }
-            .certificate {
-              margin: 0;
-              border: 2px solid #3498db !important;
-              -webkit-print-color-adjust: exact !important;
-            }
-            @page {
-              size: auto;
-              margin: 0mm;
-            }
-          }
-
-          body {
-            margin: 0;
-            padding: 20px;
-            background: #f9f7e8;
-            font-family: Georgia, serif;
-          }
-
-          .certificate {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f9f7e8;
-            position: relative;
-            text-align: center;
-            border: 2px solid #3498db;
-            border-radius: 10px;
-          }
-
-          .certificate::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-              url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Rosetta_Stone.JPG/320px-Rosetta_Stone.JPG'),
-              url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Moai_Rano_raraku.jpg/320px-Moai_Rano_raraku.jpg'),
-              url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Parthenon_Marbles%2C_British_Museum_1.jpg/320px-Parthenon_Marbles%2C_British_Museum_1.jpg'),
-              url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Lewis_Chessmen_in_the_British_Museum.jpg/320px-Lewis_Chessmen_in_the_British_Museum.jpg');
-            background-size: 150px, 150px, 150px, 150px;
-            background-position: 
-              10% 10%,
-              90% 10%,
-              10% 90%,
-              90% 90%;
-            background-repeat: no-repeat;
-            opacity: 0.1;
-            z-index: 0;
-            -webkit-print-color-adjust: exact;
-          }
-
-          .certificate::after {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            border: 4px double #3498db;
-            border-radius: 15px;
-            z-index: 1;
-          }
-
-          .content {
-            position: relative;
-            z-index: 2;
-            padding: 20px;
-          }
-
-          h1 {
-            color: #2c3e50;
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            line-height: 1.3;
-          }
-
-          .name {
-            font-size: 2em;
-            color: #2c3e50;
-            margin: 20px 0;
-            font-weight: bold;
-          }
-
-          p {
-            font-size: 1.2em;
-            line-height: 1.4;
-            margin: 10px 0;
-            color: #34495e;
-          }
-
-          .score {
-            font-size: 1.4em;
-            margin: 20px 0;
-            font-weight: bold;
-            color: #2c3e50;
-          }
-
-          .date {
-            font-style: italic;
-            margin-top: 20px;
-          }
-
-          @media screen and (min-width: 768px) {
-            .certificate {
-              padding: 40px;
-            }
-            h1 {
-              font-size: 2.2em;
-            }
-            .name {
-              font-size: 2.5em;
-            }
-            p {
-              font-size: 1.3em;
-            }
-          }
-        </style>
-      </head>
-      <body>
-        <div class="certificate">
-          <div class="content">
-            <h1>🏛️ Certificato di Piccolo Esploratore<br>del British Museum 🏛️</h1>
-            <p>Con grande piacere si certifica che</p>
-            <div class="name">${childName}</div>
-            <p>ha completato con successo il Tour Quiz del British Museum</p>
-            <p>dimostrando una straordinaria conoscenza della storia e dei tesori del museo!</p>
-            <div class="score">Punteggio finale: ${score}</div>
-            <div class="date">Data: ${currentDate}</div>
-          </div>
-        </div>
-        <script>
-          window.onload = function() {
-            document.fonts.ready.then(function () {
-              if (window.matchMedia('(max-width: 767px)').matches) {
-                alert('Salva il certificato come PDF per stamparlo più tardi!');
-              } else {
-                window.print();
-              }
-            });
-          };
-        </script>
-      </body>
-    </html>
-  `;
-
-  printWindow.document.write(certificateContent);
-  printWindow.document.close();
-}
-
-function goBackToSelection() {
-  difficultySelection.style.display = 'block';
-  quizContainer.style.display = 'none';
-  certificateContainer.style.display = 'none';
-}
-
-// Add event listeners when the page loads
-document.addEventListener('DOMContentLoaded', function() {
-  // Set up language switcher
-  const langButtons = document.querySelectorAll('.lang-btn');
-  langButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const lang = button.dataset.lang;
-      updateLanguage(lang);
+    const certTranslations = certificateTranslations[currentTour][currentLanguage];
+    
+    document.querySelector('#certificate-title').textContent = certTranslations.title;
+    document.querySelector('#certificate-intro').textContent = certTranslations.intro;
+    document.querySelector('#certificate-achievement').textContent = certTranslations.achievement;
+    document.querySelector('#certificate-praise').textContent = certTranslations.praise;
+    document.querySelector('.print-text').textContent = certTranslations.print;
+    document.querySelector('.restart-text').textContent = certTranslations.restart;
+    document.querySelector('#final-score').textContent = score;
+    
+    document.querySelector('#quiz-container').style.display = 'none';
+    document.querySelector('#certificate-container').style.display = 'block';
+    
+    // Add event listeners for certificate buttons
+    document.querySelector('#print-certificate').addEventListener('click', () => {
+        window.print();
     });
-  });
-
-  // Set up difficulty selection
-  const difficultyButtons = document.querySelectorAll('.difficulty-btn');
-  difficultyButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const difficulty = button.dataset.difficulty;
-      startQuiz(difficulty);
+    
+    document.querySelector('#restart-btn').addEventListener('click', () => {
+        document.querySelector('#certificate-container').style.display = 'none';
+        goBack();
     });
-  });
+}
 
-  // Set up quiz-related event listeners
-  nextButton.addEventListener('click', handleNextButton);
-  
-  // Set up back button
-  const backButton = document.getElementById('back-btn');
-  if (backButton) {
-    backButton.addEventListener('click', goBackToSelection);
-  }
+function goBackToTours() {
+    // Reset tour selection
+    currentTour = null;
+    
+    // Hide difficulty selection
+    const difficultySelection = document.querySelector('#difficulty-selection');
+    if (difficultySelection) {
+        difficultySelection.remove();
+    }
+    
+    // Show tours container and reset title
+    document.querySelector('.tours-container').style.display = 'grid';
+    updatePageLanguage();
+}
 
-  // Set up certificate-related event listeners
-  const restartBtn = document.getElementById('restart-btn');
-  if (restartBtn) {
-    restartBtn.addEventListener('click', goBackToSelection);
-  }
-
-  const printBtn = document.getElementById('print-certificate');
-  if (printBtn) {
-    printBtn.addEventListener('click', printCertificate);
-  }
-
-  const nameInput = document.getElementById('child-name');
-  if (nameInput) {
-    nameInput.removeAttribute('readonly');
-    nameInput.removeAttribute('disabled');
-  }
-});
-
-// Add touch handling for buttons
-document.querySelectorAll('button').forEach(button => {
-  button.addEventListener('touchstart', function() {
-    this.style.transform = 'scale(0.98)';
-  });
-  
-  button.addEventListener('touchend', function() {
-    this.style.transform = 'scale(1)';
-  });
+// Initialize page
+document.addEventListener('DOMContentLoaded', () => {
+    updatePageLanguage();
 });
   

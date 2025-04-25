@@ -606,7 +606,7 @@ const tours = {
                 next: "Avanti",
                 back: "Indietro",
                 congrats: "Congratulazioni!",
-                cardTitle: "Westminster Walking Tour",
+                cardTitle: "Tour a Piedi di Westminster",
                 cardDescription: "Cammina nel cuore della storia di Londra!"
             }
         }
@@ -700,7 +700,7 @@ const homeTranslations = {
             description: "Scopri i dinosauri e le meraviglie della natura!"
         },
         westminster: {
-            title: "Westminster Walking Tour",
+            title: "Tour a piedi di Westminster",
             description: "Cammina nel cuore della storia di Londra!"
         },
         back: "Torna alla selezione"
@@ -909,19 +909,36 @@ function changeLanguage(lang) {
 }
 
 function updatePageLanguage() {
-    const elements = document.querySelectorAll('[data-translate]');
-    
-    elements.forEach(element => {
-        const key = element.getAttribute('data-translate');
-        const [tourId, translationKey] = key.split('-');
-        
-        if (tours[tourId] && tours[tourId].translations && tours[tourId].translations[currentLanguage]) {
-            element.textContent = tours[tourId].translations[currentLanguage][translationKey];
-        }
-    });
-
     // Update main title
     document.getElementById('main-title').textContent = homeTranslations[currentLanguage].title;
+    
+    // Update tour cards
+    const britishMuseumCard = document.querySelector('[data-tour="british-museum"]');
+    if (britishMuseumCard) {
+        britishMuseumCard.querySelector('h2').textContent = homeTranslations[currentLanguage].britishMuseum.title;
+        britishMuseumCard.querySelector('p').textContent = homeTranslations[currentLanguage].britishMuseum.description;
+    }
+    
+    const naturalHistoryCard = document.querySelector('[data-tour="natural-history"]');
+    if (naturalHistoryCard) {
+        naturalHistoryCard.querySelector('h2').textContent = homeTranslations[currentLanguage].naturalHistory.title;
+        naturalHistoryCard.querySelector('p').textContent = homeTranslations[currentLanguage].naturalHistory.description;
+    }
+    
+    const westminsterCard = document.querySelector('[data-tour="westminster"]');
+    if (westminsterCard) {
+        westminsterCard.querySelector('h2').textContent = homeTranslations[currentLanguage].westminster.title;
+        westminsterCard.querySelector('p').textContent = homeTranslations[currentLanguage].westminster.description;
+    }
+    
+    // Update back button text if it exists
+    const backButton = document.querySelector('.back-button');
+    if (backButton) {
+        const backText = backButton.querySelector('.back-text');
+        if (backText) {
+            backText.textContent = homeTranslations[currentLanguage].back;
+        }
+    }
     
     // Update certificate text if visible
     if (document.getElementById('certificate-container').style.display !== 'none') {
@@ -932,6 +949,23 @@ function updatePageLanguage() {
         document.querySelector('#certificate-praise').textContent = certTranslations.praise;
         document.querySelector('.print-text').textContent = certTranslations.print;
         document.querySelector('.restart-text').textContent = certTranslations.restart;
+        
+        // Update score and date labels
+        const scoreElement = document.querySelector('.certificate-score');
+        if (scoreElement) {
+            scoreElement.textContent = `${currentLanguage === 'it' ? 'Punteggio finale' : 'Final score'}: ${score}`;
+        }
+        
+        const dateLabel = document.querySelector('.certificate-date');
+        if (dateLabel) {
+            dateLabel.textContent = `${currentLanguage === 'it' ? 'Data' : 'Date'}: ${document.querySelector('#current-date').textContent}`;
+        }
+    }
+    
+    // Update child name placeholder
+    const childNameInput = document.querySelector('#child-name');
+    if (childNameInput) {
+        childNameInput.placeholder = currentLanguage === 'it' ? 'Inserisci il tuo nome' : 'Enter your name';
     }
 }
 

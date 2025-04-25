@@ -233,8 +233,8 @@ button:hover, button:active {
   border-bottom: 1px solid #000;
   margin: 20px auto;
   padding: 5px 20px;
-  width: 60%;
-  max-width: 300px;
+  width: 80%;
+  max-width: 800px;
   background: transparent;
   color: #000;
   outline: none;

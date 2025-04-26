@@ -221,19 +221,19 @@ const tours = {
                 },
                 {
                     question: {
-                        en: "What color is the famous dinosaur skeleton in the main hall?",
-                        it: "Di che colore è il famoso scheletro di dinosauro nella sala principale?"
+                        en: "What color is the famous animal skeleton in the main hall?",
+                        it: "Di che colore è il famoso scheletro di animale nella sala principale?"
                     },
                     answers: {
-                        en: ["White/Beige", "Brown", "Black", "Grey"],
-                        it: ["Bianco/Beige", "Marrone", "Nero", "Grigio"]
+                        en: ["White/Beige", "Red", "Black", "Blue"],
+                        it: ["Bianco/Beige", "Rosso", "Nero", "Blu"]
                     },
                     correct: 0
                 },
                 {
                     question: {
-                        en: "What is the name of the famous T-Rex in the museum?",
-                        it: "Come si chiama il famoso T-Rex nel museo?"
+                        en: "What is the name of the famous Stegosaurus in the museum?",
+                        it: "Come si chiama il famoso Stegosauro nel museo?"
                     },
                     answers: {
                         en: ["Sophie", "Rex", "Tommy", "Bob"],
@@ -254,12 +254,12 @@ const tours = {
                 },
                 {
                     question: {
-                        en: "What is the color of the building's exterior?",
-                        it: "Di che colore è l'esterno dell'edificio?"
+                        en: "What is the name of the big Blue Whale?",
+                        it: "Quale è il nome della grande Balenottera Azzurra?"
                     },
                     answers: {
-                        en: ["Terracotta and blue", "White and grey", "Red and black", "Yellow and brown"],
-                        it: ["Terracotta e blu", "Bianco e grigio", "Rosso e nero", "Giallo e marrone"]
+                        en: ["Hope", "Marie", "Susan", "Katie"],
+                        it: ["Hope", "Marie", "Susan", "Katie"]
                     },
                     correct: 0
                 }
@@ -278,8 +278,8 @@ const tours = {
                 },
                 {
                     question: {
-                        en: "What is the name of the earthquake simulator?",
-                        it: "Come si chiama il simulatore di terremoti?"
+                        en: "What is the name of the city in the earthquake simulator?",
+                        it: "Come si chiama la città del simulatore di terremoti?"
                     },
                     answers: {
                         en: ["Kobe", "Tokyo", "San Francisco", "Mexico City"],
@@ -417,8 +417,8 @@ const tours = {
                         it: "Come si chiama la famosa torre dell'orologio di Westminster?"
                     },
                     answers: {
-                        en: ["Big Ben", "Tower Bridge", "London Eye", "The Shard"],
-                        it: ["Big Ben", "Tower Bridge", "London Eye", "The Shard"]
+                        en: ["Elizabeth Tower", "Tower Bridge", "London Eye", "The Shard"],
+                        it: ["Elizabeth Tower", "Tower Bridge", "London Eye", "The Shard"]
                     },
                     correct: 0
                 },
@@ -531,8 +531,8 @@ const tours = {
                         it: "Quante campane ci sono dentro Big Ben?"
                     },
                     answers: {
-                        en: ["5", "3", "4", "6"],
-                        it: ["5", "3", "4", "6"]
+                        en: ["4", "3", "7", "6"],
+                        it: ["4", "3", "7", "6"]
                     },
                     correct: 0
                 },

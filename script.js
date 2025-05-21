@@ -214,19 +214,19 @@ const tours = {
                         it: "Quale famosa creatura accoglie i visitatori nella sala principale?"
                     },
                     answers: {
-                        en: ["A blue whale", "A T-Rex", "A mammoth", "A giraffe"],
-                        it: ["Una balena blu", "Un T-Rex", "Un mammut", "Una giraffa"]
+                        en: ["A blue whale", "A T-Rex", "An eagle", "A giraffe"],
+                        it: ["Una balena blu", "Un T-Rex", "Un'aquila", "Una giraffa"]
                     },
                     correct: 0
                 },
                 {
                     question: {
-                        en: "What color is the famous animal skeleton in the main hall?",
-                        it: "Di che colore è il famoso scheletro di animale nella sala principale?"
+                        en: "What is the best way to run away from a T-Rex?",
+                        it: "Quale è il miglior modo per scappare da un T-Rex?"
                     },
                     answers: {
-                        en: ["White/Beige", "Red", "Black", "Blue"],
-                        it: ["Bianco/Beige", "Rosso", "Nero", "Blu"]
+                        en: ["Zig-Zag", "Jump", "Crawl", "Stand still"],
+                        it: ["Zig-Zag", "Saltare", "Strisciare", "Stare fermi"]
                     },
                     correct: 0
                 },
@@ -243,12 +243,12 @@ const tours = {
                 },
                 {
                     question: {
-                        en: "What can you find in the Red Zone?",
-                        it: "Cosa puoi trovare nella Zona Rossa?"
+                        en: "What is burning hot and comes out of volcanoes?",
+                        it: "Cosa è estremamente calda ed esce dai vulcani?"
                     },
                     answers: {
-                        en: ["Volcanoes and earthquakes", "Dinosaurs", "Animals", "Plants"],
-                        it: ["Vulcani e terremoti", "Dinosauri", "Animali", "Piante"]
+                        en: ["Lava", "Fossils", "Leaves", "Water"],
+                        it: ["Lava", "Fossili", "Foglie", "Acqua"]
                     },
                     correct: 0
                 },
